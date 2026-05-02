@@ -24,8 +24,10 @@ Automatically deploys to Vercel when code is pushed to `main`.
 
 **What it does:**
 - ✅ Installs dependencies
-- ✅ Builds the project
-- ✅ Deploys production build to Vercel
+- ✅ Validates all required Vercel secrets exist
+- ✅ Verifies API access to your Vercel project (preflight check)
+- ✅ Pulls production environment metadata from Vercel
+- ✅ Builds and deploys production artifacts via Vercel CLI
 
 **Triggers:**
 - Push to `main` branch only
@@ -115,6 +117,23 @@ act push -j deploy
 - Verify all three Vercel secrets are set correctly
 - Check Vercel project exists and is linked
 - View full logs in Actions tab for specific errors
+
+### `not_found` error during deploy
+If you see `not_found`, this almost always means one of these is mismatched:
+- `VERCEL_TOKEN` does not have access to the team/project
+- `VERCEL_ORG_ID` points to a different team scope
+- `VERCEL_PROJECT_ID` belongs to another account/team
+
+Validate your values locally:
+
+```powershell
+$env:VERCEL_TOKEN="<token>"
+$env:VERCEL_ORG_ID="<org_id>"
+$env:VERCEL_PROJECT_ID="<project_id>"
+Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:VERCEL_TOKEN" } -Uri "https://api.vercel.com/v9/projects/$env:VERCEL_PROJECT_ID?teamId=$env:VERCEL_ORG_ID"
+```
+
+If this command fails, update the secrets in GitHub Actions before retrying.
 
 ### Linter warnings appear
 - The CI workflow is set to `continue-on-error: true` for linting
