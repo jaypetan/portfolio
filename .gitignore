@@ -78,6 +78,16 @@ web_modules/
 .next
 out
 
+# Vercel
+.vercel
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
 # Nuxt.js build / generate output
 .nuxt
 dist
