@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import BackgroundGradientAnimation from '@/components/BackgroundGradientAnimation';
+import BackgroundGradientAnimation from '@/components/backgrounds/BackgroundGradientAnimation';
 
 const Home: NextPage = () => {
   return (
@@ -9,8 +9,8 @@ const Home: NextPage = () => {
         <title>Portfolio - Home</title>
         <meta name="description" content="Welcome to my portfolio" />
       </Head>
-      <main className="h-[calc(100vh-70px)]">
-        <BackgroundGradientAnimation>
+      <BackgroundGradientAnimation>
+        <main className="h-[calc(100vh-70px)]">
           <div className="flex h-full w-full items-center justify-center px-6 text-center">
             <div className="max-w-3xl space-y-4">
               <p className="text-sm uppercase tracking-[0.35em] text-cyan-200/80">
@@ -24,8 +24,8 @@ const Home: NextPage = () => {
               </p>
             </div>
           </div>
-        </BackgroundGradientAnimation>
-      </main>
+        </main>
+      </BackgroundGradientAnimation>
     </>
   );
 };
