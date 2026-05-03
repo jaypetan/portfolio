@@ -14,8 +14,8 @@ const About: NextPage = () => {
             About Me
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed mb-8">
-            I'm a passionate developer creating interactive web experiences. I specialize in modern
-            web technologies including Next.js, React, and 3D graphics with Three.js.
+            I&apos;m a passionate developer creating interactive web experiences. I specialize in
+            modern web technologies including Next.js, React, and 3D graphics with Three.js.
           </p>
           <section className="mt-12">
             <h2 className="text-3xl font-bold text-sky-400 mb-6">Skills</h2>

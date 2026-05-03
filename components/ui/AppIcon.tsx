@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface AppIconProps {
@@ -29,7 +30,13 @@ export default function AppIcon({
       `}
     >
       {iconSrc ? (
-        <img src={iconSrc} alt={iconAlt} className="h-full w-full object-contain" />
+        <Image
+          src={iconSrc}
+          alt={iconAlt}
+          width={64}
+          height={64}
+          className="h-full w-full object-contain"
+        />
       ) : (
         <svg
           className="h-full w-full text-white"

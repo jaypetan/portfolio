@@ -1,10 +1,7 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import AppIcon from '@/components/ui/AppIcon';
 
 export default function Navigation() {
-  const router = useRouter();
   const [isPinnedTop, setIsPinnedTop] = useState(false);
 
   useEffect(() => {
