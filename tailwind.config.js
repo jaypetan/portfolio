@@ -19,6 +19,11 @@ module.exports = {
       },
       animation: {
         fadeIn: 'fadeIn 0.8s ease-in',
+        first: 'moveHorizontal 60s linear infinite',
+        second: 'moveInCircle 90s linear infinite',
+        third: 'moveVertical 75s linear infinite',
+        fourth: 'moveHorizontal 85s linear infinite',
+        fifth: 'moveInCircle 120s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -31,9 +36,41 @@ module.exports = {
             transform: 'translateY(0)',
           },
         },
+        moveHorizontal: {
+          '0%': {
+            transform: 'translateX(-50%) translateY(-10%) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translateX(50%) translateY(10%) rotate(4deg)',
+          },
+          '100%': {
+            transform: 'translateX(-50%) translateY(-10%) rotate(0deg)',
+          },
+        },
+        moveInCircle: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '50%': {
+            transform: 'rotate(180deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
+        moveVertical: {
+          '0%': {
+            transform: 'translateY(-50%) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translateY(50%) rotate(-4deg)',
+          },
+          '100%': {
+            transform: 'translateY(-50%) rotate(0deg)',
+          },
+        },
       },
     },
   },
   plugins: [],
-}
-
+};

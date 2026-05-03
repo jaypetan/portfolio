@@ -5,24 +5,29 @@ This project includes two GitHub Actions workflows for continuous integration an
 ## Workflows Overview
 
 ### 1. **CI Workflow** (`.github/workflows/ci.yml`)
+
 Runs on every push and pull request to `main` or `develop` branches.
 
 **What it does:**
+
 - ✅ Installs dependencies
 - ✅ Runs ESLint (linter)
 - ✅ Builds the Next.js project
 - ✅ Tests Node.js versions 18.x and 20.x
 
 **Triggers:**
+
 - Push to `main` or `develop`
 - Pull requests targeting `main` or `develop`
 
 ---
 
 ### 2. **Deploy Workflow** (`.github/workflows/deploy.yml`)
+
 Automatically deploys to Vercel when code is pushed to `main`.
 
 **What it does:**
+
 - ✅ Installs dependencies
 - ✅ Validates all required Vercel secrets exist
 - ✅ Verifies API access to your Vercel project (preflight check)
@@ -30,6 +35,7 @@ Automatically deploys to Vercel when code is pushed to `main`.
 - ✅ Builds and deploys production artifacts via Vercel CLI
 
 **Triggers:**
+
 - Push to `main` branch only
 
 ---
@@ -44,17 +50,20 @@ To deploy to Vercel, you need to add GitHub secrets. Go to your repository:
 2. Click **New repository secret** and add these three secrets:
 
 #### `VERCEL_TOKEN`
+
 - Go to [Vercel Dashboard](https://vercel.com/account/tokens)
 - Click **Create Token**
 - Copy the token value
 - Add as secret `VERCEL_TOKEN`
 
 #### `VERCEL_ORG_ID`
+
 - Go to [Vercel Account Settings](https://vercel.com/account)
 - Find your **Team ID** (or use Personal Account ID)
 - Add as secret `VERCEL_ORG_ID`
 
 #### `VERCEL_PROJECT_ID`
+
 - In [Vercel Dashboard](https://vercel.com/dashboard), select your project
 - Click **Settings** → **General**
 - Copy the **Project ID**
@@ -109,17 +118,21 @@ act push -j deploy
 ## Troubleshooting
 
 ### Build fails but works locally
+
 - Check Node version compatibility (workflows test 18.x and 20.x)
 - Ensure all dependencies are listed in `package.json`
 - Check for environment-specific code
 
 ### Deploy doesn't work
+
 - Verify all three Vercel secrets are set correctly
 - Check Vercel project exists and is linked
 - View full logs in Actions tab for specific errors
 
 ### `not_found` error during deploy
+
 If you see `not_found`, this almost always means one of these is mismatched:
+
 - `VERCEL_TOKEN` does not have access to the team/project
 - `VERCEL_ORG_ID` points to a different team scope
 - `VERCEL_PROJECT_ID` belongs to another account/team
@@ -136,6 +149,7 @@ Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:VERCEL_TOKEN" } -Uri 
 If this command fails, update the secrets in GitHub Actions before retrying.
 
 ### Linter warnings appear
+
 - The CI workflow is set to `continue-on-error: true` for linting
 - To fail on linting errors, edit `.github/workflows/ci.yml`:
   ```yml
@@ -149,7 +163,9 @@ If this command fails, update the secrets in GitHub Actions before retrying.
 ## Customization
 
 ### Change trigger branches
+
 Edit the workflow files to match your branch strategy:
+
 ```yml
 on:
   push:
@@ -159,14 +175,18 @@ on:
 ```
 
 ### Add environment variables
+
 In workflow files, add an `env` section:
+
 ```yml
 env:
   NODE_ENV: production
 ```
 
 ### Add more checks
+
 Add additional steps before the build:
+
 ```yml
 - name: Run tests
   run: npm test
@@ -186,6 +206,7 @@ Add additional steps before the build:
 5. ✅ Customize workflows as needed
 
 For more info:
+
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Vercel GitHub Integration](https://vercel.com/docs/git/github)
 - [Next.js Deployment Guide](https://nextjs.org/docs/deployment)

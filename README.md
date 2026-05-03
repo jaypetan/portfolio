@@ -45,11 +45,13 @@ portfolio/
 ### Installation
 
 1. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Run the development server**
+
    ```bash
    npm run dev
    ```
@@ -70,6 +72,7 @@ The project is ready to deploy on Vercel with zero configuration needed.
 ### Steps to Deploy:
 
 1. **Push your code to GitHub**
+
    ```bash
    git add .
    git commit -m "Initial portfolio setup"
@@ -77,6 +80,7 @@ The project is ready to deploy on Vercel with zero configuration needed.
    ```
 
 2. **Connect to Vercel**
+
    - Go to [vercel.com](https://vercel.com)
    - Click "New Project"
    - Import your GitHub repository
@@ -88,6 +92,7 @@ The project is ready to deploy on Vercel with zero configuration needed.
 ### Environment Variables (if needed)
 
 Create a `.env.local` file in the root directory:
+
 ```
 # Add your environment variables here
 ```
@@ -102,12 +107,14 @@ This project includes automated CI/CD workflows:
 ### Setup GitHub Actions CI/CD
 
 See [CI_CD_SETUP.md](./CI_CD_SETUP.md) for complete setup instructions including:
+
 - Setting up Vercel secrets
 - Understanding workflow triggers
 - Monitoring deployments
 - Troubleshooting
 
 Quick start:
+
 1. Add `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` secrets to GitHub
 2. Push to `main` branch
 3. Watch workflows run in the Actions tab
@@ -117,15 +124,16 @@ Quick start:
 ### Adding New Pages
 
 Create a new file in the `pages/` directory:
+
 ```tsx
 // pages/projects.tsx
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 
 const Projects: NextPage = () => {
-  return <main>Projects Page</main>
-}
+  return <main>Projects Page</main>;
+};
 
-export default Projects
+export default Projects;
 ```
 
 Update the navigation in `components/Navigation.tsx` to link to the new page.
@@ -133,6 +141,7 @@ Update the navigation in `components/Navigation.tsx` to link to the new page.
 ### Modifying the 3D Scene
 
 Edit `components/Scene3D.tsx` to add more 3D elements, models, or interactive features:
+
 - Change geometries and materials
 - Add animations
 - Load 3D models (glTF, OBJ, etc.)

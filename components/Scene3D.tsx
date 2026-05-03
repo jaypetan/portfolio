@@ -1,39 +1,44 @@
-import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera, OrbitControls } from '@react-three/drei'
-import { Mesh } from 'three'
-import { useRef, useEffect } from 'react'
+'use client';
 
-function RotatingBox() {
-  const meshRef = useRef<Mesh>(null)
+import { useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
-  useEffect(() => {
-    const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.x += 0.01
-        meshRef.current.rotation.y += 0.01
-      }
+// Keep this scene around for future 3D experiments.
+function Box() {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHover] = useState(false);
+  const [clicked, setClick] = useState(false);
+
+  useFrame((_, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += delta * 0.5;
+      meshRef.current.rotation.y += delta * 0.5;
     }
-
-    const animationId = setInterval(animate, 16)
-    return () => clearInterval(animationId)
-  }, [])
+  });
 
   return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[2, 2, 2]} />
-      <meshPhongMaterial color="#0ea5e9" />
+    <mesh
+      ref={meshRef}
+      scale={hovered ? 1.5 : 1}
+      onClick={() => setClick(!clicked)}
+      onPointerOver={() => setHover(true)}
+      onPointerOut={() => setHover(false)}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={clicked ? '#ff4444' : '#4488ff'} />
     </mesh>
-  )
+  );
 }
 
 export default function Scene3D() {
   return (
-    <Canvas style={{ width: '100%', height: '100%' }}>
-      <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
-      <RotatingBox />
-      <OrbitControls />
-    </Canvas>
-  )
+    <div className="h-full w-full bg-transparent">
+      <Canvas className="h-full w-full" camera={{ position: [0, 0, 5] }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <Box />
+      </Canvas>
+    </div>
+  );
 }

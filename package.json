@@ -6,24 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@base-ui/react": "^1.4.1",
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^8.14.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
+    "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "next": "^14.0.0",
-    "three": "^0.184.0",
-    "@react-three/fiber": "^8.14.0",
-    "@react-three/drei": "^9.88.0"
+    "tailwind-merge": "^3.5.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
-    "typescript": "^5.3.0",
+    "@types/node": "^20.8.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@types/node": "^20.8.0",
     "@types/three": "^0.184.0",
-    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
-    "autoprefixer": "^10.4.0"
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.0"
   }
 }

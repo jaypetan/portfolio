@@ -1,5 +1,6 @@
 name: CI
 
+# This workflow runs whenever the code is pushed or pulled to the main or develop branches.
 on:
   push:
     branches: [main, develop]
@@ -19,7 +20,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-
+        # Set up environment and dependencies
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v5
         with:
@@ -29,13 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+        # Check code for formatting and syntax errors.
       - name: Run linter
         run: npm run lint
         continue-on-error: true
 
+        # Build the project
       - name: Build
         run: npm run build
 
+        # To verify that the build was successful
       - name: Check build output
         run: test -d .next
         shell: bash

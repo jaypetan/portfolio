@@ -1,6 +1,6 @@
-import type { AppProps } from 'next/app'
-import Navigation from '@/components/Navigation'
-import './globals.css'
+import type { AppProps } from 'next/app';
+import Navigation from '@/components/Navigation';
+import './globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -8,5 +8,5 @@ export default function App({ Component, pageProps }: AppProps) {
       <Navigation />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
