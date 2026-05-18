@@ -8,7 +8,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" data-scroll-behavior="smooth">
         <Head>
           <meta charSet="UTF-8" />
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

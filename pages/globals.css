@@ -1,15 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import 'tailwindcss';
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 @layer components {
   .glassmorphism {
-    position: relative;
     border-radius: 16px;
     background: rgba(192, 192, 192, 0.1);
     border: 1px solid rgba(192, 192, 192, 0.05);
     backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px 0 rgba(192, 192, 192, 0.1);
+    transition: background-color 200ms ease, border-color 200ms ease;
   }
 
   .glow {
@@ -36,10 +46,11 @@
     margin: 0;
     background: #020617;
     color: #e2e8f0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
   a {
