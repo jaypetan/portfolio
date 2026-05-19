@@ -16,7 +16,7 @@ export default function Light() {
       <div
         className={`${
           theme === 'light' ? 'opacity-80' : 'opacity-5'
-        } hover: absolute top-2 -left-2 z-10 aspect-square h-3/5 rounded-full bg-yellow-200 shadow-[0px_0px_20px_10px] shadow-yellow-200`}
+        } absolute top-2 -left-2 z-10 aspect-square h-3/5 rounded-full bg-yellow-200 shadow-[0px_0px_20px_10px] shadow-yellow-200`}
       />
       <Image
         src={Lightbulb}
