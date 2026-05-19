@@ -44,7 +44,7 @@ export default function Navigation() {
 
   return (
     <nav className="fixed left-1/2 z-100 bottom-12 -translate-x-1/2">
-      <div className="min-w-[600px] flex items-center justify-between px-4 py-4 glassmorphism">
+      <div className="w-[100dvw - 2px] sm:w-150 flex items-center justify-between px-4 py-4 glassmorphism-darkbg dark:glassmorphism">
         {/* Work Experiences */}
         <ul className="flex gap-4 list-none">
           {workExperiences.map((experience, index) => (
@@ -59,7 +59,7 @@ export default function Navigation() {
           ))}
         </ul>
         {/* Projects */}
-        <ul className="flex gap-4 list-none border-l-2 border-white/10 pl-8">
+        <ul className="flex gap-4 list-none border-l-2 border-white/10 pl-2 sm:pl-8">
           {projects.map((project, index) => (
             <li key={index}>
               <AppIcon

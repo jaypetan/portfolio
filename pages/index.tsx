@@ -11,6 +11,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Welcome to my portfolio" />
       </Head>
       <main className="h-screen relative flex">
+        {/* Background */}
         <LiquidEther
           colors={['#06B6D4', '#3B82F6', '#7C3AED']}
           mouseForce={11}
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
           autoResumeDelay={3000}
           autoRampDuration={0.6}
         />
+        {/* Main Content */}
         <HomePage />
       </main>
     </>

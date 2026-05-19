@@ -1,19 +1,15 @@
 import type { SpringOptions } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import Image, { type StaticImageData } from 'next/image';
 
 interface TiltedCardProps {
-  imageSrc: React.ComponentProps<'img'>['src'];
+  image?: StaticImageData | string;
   altText?: string;
-  captionText?: string;
-  containerHeight?: React.CSSProperties['height'];
-  containerWidth?: React.CSSProperties['width'];
-  imageHeight?: React.CSSProperties['height'];
-  imageWidth?: React.CSSProperties['width'];
+  imageSize?: string;
   scaleOnHover?: number;
   rotateAmplitude?: number;
   showMobileWarning?: boolean;
-  showTooltip?: boolean;
   overlayContent?: React.ReactNode;
   displayOverlayContent?: boolean;
 }
@@ -25,17 +21,12 @@ const springValues: SpringOptions = {
 };
 
 export default function TiltedCard({
-  imageSrc,
+  image,
   altText = 'Tilted card image',
-  captionText = '',
-  containerHeight = '300px',
-  containerWidth = '100%',
-  imageHeight = '300px',
-  imageWidth = '300px',
+  imageSize = 'w-64 h-64',
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showMobileWarning = true,
-  showTooltip = true,
   overlayContent = null,
   displayOverlayContent = false,
 }: TiltedCardProps) {
@@ -49,13 +40,7 @@ export default function TiltedCard({
   const scaleBase = useMotionValue(1);
   const scale = useSpring(scaleBase, springValues);
   const opacityBase = useMotionValue(0);
-  const opacity = useSpring(opacityBase, springValues);
   const rotateFigcaptionBase = useMotionValue(0);
-  const rotateFigcaption = useSpring(rotateFigcaptionBase, {
-    stiffness: 350,
-    damping: 30,
-    mass: 1,
-  });
 
   const [lastY, setLastY] = useState(0);
 
@@ -96,11 +81,7 @@ export default function TiltedCard({
   return (
     <figure
       ref={ref}
-      className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
-      style={{
-        height: containerHeight,
-        width: containerWidth,
-      }}
+      className={`${imageSize} relative perspective-midrange flex flex-col items-center justify-center`}
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -112,45 +93,26 @@ export default function TiltedCard({
       )}
 
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className={` ${imageSize} relative transform-3d`}
         style={{
-          width: imageWidth,
-          height: imageHeight,
           rotateX,
           rotateY,
           scale,
         }}
       >
-        <motion.img
-          src={imageSrc}
+        <Image
+          src={image ?? ''}
           alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
+          loading="eager"
+          className={` ${imageSize} absolute top-0 left-0 object-cover rounded-[15px] will-change-transform transform-[translateZ(0)]`}
         />
 
         {displayOverlayContent && overlayContent && (
-          <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">
+          <motion.div className="absolute top-0 left-0 z-2 will-change-transform transform-[translateZ(30px)]">
             {overlayContent}
           </motion.div>
         )}
       </motion.div>
-
-      {showTooltip && (
-        <motion.figcaption
-          className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
-          style={{
-            x,
-            y,
-            opacity,
-            rotate: rotateFigcaption,
-          }}
-        >
-          {captionText}
-        </motion.figcaption>
-      )}
     </figure>
   );
 }

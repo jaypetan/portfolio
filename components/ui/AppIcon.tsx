@@ -34,9 +34,10 @@ export default function AppIcon({
         <Image
           src={iconSrc}
           alt={iconAlt}
+          loading="eager"
           width={0}
           height={0}
-          className="w-12 h-auto object-contain"
+          className="w-8 sm:w-12 h-auto object-contain"
         />
       )}
     </div>

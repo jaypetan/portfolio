@@ -22,6 +22,15 @@
     transition: background-color 200ms ease, border-color 200ms ease;
   }
 
+  .glassmorphism-darkbg {
+    border-radius: 16px;
+    background: rgba(192, 192, 192, 0.2);
+    border: 1px solid rgba(192, 192, 192, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(192, 192, 192, 0.1);
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
   .glow {
     border: 1px solid rgba(192, 192, 192, 0.05);
     box-shadow: 0 4px 32px 0 rgba(255, 255, 255, 0.1);
@@ -31,6 +40,31 @@
   .glow:hover {
     box-shadow: 0 4px 32px 0 rgba(255, 255, 255, 0.2);
     transform: translateY(-4px) scale(1.1);
+  }
+
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+  }
+
+  .font-namum {
+    font-family: 'Nanum Pen Script', cursive;
+    font-weight: 400;
+  }
+
+  .font-source-sans {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+  }
+
+  .font-playwrite {
+    font-family: 'Playwrite GB S', cursive;
+    font-weight: 700;
+  }
+
+  .content {
+    font-family: 'Inter', sans-serif;
+    color: #020617;
   }
 }
 
