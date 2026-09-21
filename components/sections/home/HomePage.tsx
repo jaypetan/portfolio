@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 import Hero from '@/images/hero/heroPic.jpg';
 import Light from './components/Light';
 import TiltedCard from '@/components/ui/TiltedCard';
 
 export default function HomePage() {
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+
+  const isDark = !mounted ? true : resolvedTheme === 'dark';
 
   return (
     <div className="flex flex-col absolute top-0 left-0 z-50 h-screen w-full items-center justify-start px-6 text-center">
-      <div className="h-screen light:text-black dark:text-white flex items-center justify-center">
+      <div
+        className={`h-screen flex items-center justify-center ${
+          isDark ? 'text-white' : 'text-black'
+        }`}
+      >
         <div className="flex flex-col sm:grid sm:grid-cols-[1fr_auto_1fr] gap-4 items-center">
           <div className="h-32 sm:self-auto">
             <Light />

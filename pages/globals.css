@@ -66,6 +66,44 @@
     font-family: 'Inter', sans-serif;
     color: #020617;
   }
+
+  @keyframes scroll-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scroll-down {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .scroll-up {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: max-content;
+    min-width: 0;
+    max-width: 100%;
+    animation: scroll-up 8s linear infinite;
+  }
+
+  .scroll-down {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: max-content;
+    min-width: 0;
+    max-width: 100%;
+    animation: scroll-down 8s linear infinite;
+  }
 }
 
 @layer base {

@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <div className="relative h-screen w-screen overflow-hidden">
         <Navigation />
         <Component {...pageProps} />

@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export default function HoverFollow({
@@ -10,11 +10,27 @@ export default function HoverFollow({
 }) {
   const followerElRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   const setPosition = useCallback((x: number, y: number) => {
-    if (followerElRef.current) {
-      followerElRef.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-    }
+    const follower = followerElRef.current;
+    if (!follower) return;
+
+    const offsetY = -40;
+    const margin = 16;
+    const width = follower.offsetWidth || 320;
+    const height = follower.offsetHeight || 220;
+    const minX = width / 2 + margin;
+    const maxX = window.innerWidth - width / 2 - margin;
+    const clampedX = Math.min(Math.max(x, minX), maxX);
+    const clampedY = Math.max(y + offsetY, height / 2 + margin);
+
+    follower.style.transform = `translate(${clampedX}px, ${clampedY}px) translate(-50%, -100%)`;
   }, []);
 
   const handleMouseMove = useCallback(
@@ -49,9 +65,8 @@ export default function HoverFollow({
   const portal = (
     <div
       ref={followerElRef}
-      style={{ transform: 'translate(-9999px, -9999px)' }}
-      className="pointer-events-none fixed left-0 translate-x-[50%] -top-8 z-9999 hidden"
-      aria-hidden
+      className="pointer-events-none fixed left-0 top-0 z-9999 hidden"
+      aria-hidden="true"
     >
       {follower}
     </div>
@@ -64,7 +79,7 @@ export default function HoverFollow({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      {createPortal(portal, document.body)}
+      {mounted && typeof document !== 'undefined' ? createPortal(portal, document.body) : null}
     </div>
   );
 }
