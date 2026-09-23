@@ -10,10 +10,10 @@ interface ShowcaseTitleOverlayProps {
 export default function ShowcaseTitleOverlay({
   title,
   subtitle,
-  titleClassName = 'text-xl font-semibold tracking-wide text-white sm:text-2xl',
+  titleClassName = 'text-xl whitespace-nowrap font-semibold tracking-wide text-white sm:text-2xl ',
   subtitleClassName = 'text-sm text-white/80 sm:text-base',
   panelClassName = 'rounded-xl border border-white/10 bg-black/70 px-8 py-2 backdrop-blur-sm min-w-64',
-  containerClassName = 'pointer-events-none absolute left-1/2 bottom-12 z-10 -translate-x-1/2',
+  containerClassName = 'pointer-events-none absolute left-1/2 bottom-2 sm:bottom-4 z-10 -translate-x-1/2',
 }: ShowcaseTitleOverlayProps) {
   return (
     <div className={containerClassName}>

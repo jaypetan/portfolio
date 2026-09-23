@@ -1,4 +1,4 @@
-import InfiniteImageLoop from '@/components/ui/InfiniteImageLoop';
+import InfiniteImageLoop from '@/components/ui/HoverComponents/InfiniteImageLoop';
 
 interface ImageShowcaseColumnsProps {
   columns: Array<{
@@ -10,16 +10,18 @@ interface ImageShowcaseColumnsProps {
   }>;
   heightClassName?: string;
   containerClassName?: string;
+  className?: string;
 }
 
 export default function ImageShowcaseColumns({
   columns,
   heightClassName = 'h-64',
   containerClassName = 'flex flex-row gap-4',
+  className = '',
 }: ImageShowcaseColumnsProps) {
   return (
     <div
-      className={`mx-auto w-[calc(100vw-2.5rem)] max-w-135 overflow-hidden bg-slate-950/40 p-2 shadow-lg sm:w-auto ${containerClassName}`.trim()}
+      className={`mx-auto w-[calc(100vw-2.5rem)] max-w-135 overflow-hidden bg-transparent p-0 shadow-none sm:w-auto ${className} ${containerClassName}`.trim()}
     >
       {columns.map((column, index) => (
         <InfiniteImageLoop

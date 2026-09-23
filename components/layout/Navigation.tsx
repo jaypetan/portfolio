@@ -8,15 +8,17 @@ import HoverFollow from '@/components/ui/HoverFollow';
 import MentaiyaShowcase from '@/components/sections/home/appComponents/MentaiyaShowcase';
 import SarcShowcase from '@/components/sections/home/appComponents/SarcShowcase';
 import MetevShowcase from '@/components/sections/home/appComponents/MetevShowcase';
+import DontDrownShowcase from '@/components/sections/home/appComponents/DontDrownShowcase';
+import NTUeatsShowcase from '@/components/sections/home/appComponents/NTUeatsShowcase';
 
 export default function Navigation() {
   const workExperiences = [
     {
-      company: 'SARC',
-      imageSrc: sarcLogo,
-      href: '/work/sarc',
-      bg: '#0A438D',
-      showcase: <SarcShowcase />,
+      company: 'MetEV',
+      imageSrc: metevLogo,
+      href: '/work/metev',
+      bg: '#000000',
+      showcase: <MetevShowcase />,
     },
     {
       company: 'Mentai-ya',
@@ -26,11 +28,11 @@ export default function Navigation() {
       showcase: <MentaiyaShowcase />,
     },
     {
-      company: 'MetEV',
-      imageSrc: metevLogo,
-      href: '/work/metev',
-      bg: '#000000',
-      showcase: <MetevShowcase />,
+      company: 'SARC',
+      imageSrc: sarcLogo,
+      href: '/work/sarc',
+      bg: '#0A438D',
+      showcase: <SarcShowcase />,
     },
   ];
 
@@ -40,12 +42,14 @@ export default function Navigation() {
       imageSrc: dontDrownLogo,
       href: '/projects/dontdrown',
       bg: '#002E45',
+      showcase: <DontDrownShowcase videoUrl="https://youtu.be/skGXpbNtIdw" />,
     },
     {
       name: 'NTUeats',
       imageSrc: NTUeatsLogo,
       href: '/projects/ntueats',
       bg: '#FAE1A0',
+      showcase: <NTUeatsShowcase />,
     },
   ];
 
@@ -71,12 +75,14 @@ export default function Navigation() {
         <ul className="flex gap-4 list-none border-l-2 border-white/10 pl-2 sm:pl-8">
           {projects.map((project, index) => (
             <li key={index}>
-              <AppIcon
-                backgroundColor={project.bg}
-                iconSrc={project.imageSrc}
-                iconAlt={project.name}
-                href={project.href}
-              />
+              <HoverFollow follower={project.showcase}>
+                <AppIcon
+                  backgroundColor={project.bg}
+                  iconSrc={project.imageSrc}
+                  iconAlt={project.name}
+                  href={project.href}
+                />
+              </HoverFollow>
             </li>
           ))}
         </ul>

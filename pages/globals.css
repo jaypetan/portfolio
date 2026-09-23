@@ -104,6 +104,20 @@
     max-width: 100%;
     animation: scroll-down 8s linear infinite;
   }
+
+  @keyframes sarc-mouse-drift {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateX(-18px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateX(18px);
+    }
+  }
+
+  .sarc-mouse-drift {
+    animation: sarc-mouse-drift 7s ease-in-out infinite;
+  }
 }
 
 @layer base {

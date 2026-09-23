@@ -1,5 +1,6 @@
-import ImageShowcaseColumns from '@/components/ui/ImageShowcaseColumns';
-import ShowcaseTitleOverlay from '@/components/ui/ShowcaseTitleOverlay';
+import ImageShowcaseColumns from '@/components/ui/HoverComponents/ImageShowcaseColumns';
+import ShowcaseBoundedFrame from '@/components/ui/HoverComponents/ShowcaseBoundedFrame';
+import ShowcaseTitleOverlay from '@/components/ui/HoverComponents/ShowcaseTitleOverlay';
 import career from '@/images/companies/mentaiya/mentaiya-career.png';
 import review from '@/images/companies/mentaiya/mentaiya-reviews.png';
 import home from '@/images/companies/mentaiya/mentaiya-home.png';
@@ -12,7 +13,7 @@ const showcaseImages3 = [story, menu];
 
 const MentaiyaShowcase = () => {
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-2xl bg-white/5 p-2">
+    <ShowcaseBoundedFrame className="rounded-2xl bg-slate-950/50">
       <ShowcaseTitleOverlay title="Mentai-Ya" subtitle="Web Developer" />
       <ImageShowcaseColumns
         columns={[
@@ -21,7 +22,7 @@ const MentaiyaShowcase = () => {
           { images: showcaseImages3, direction: 'up', imageWidth: 160 },
         ]}
       />
-    </div>
+    </ShowcaseBoundedFrame>
   );
 };
 

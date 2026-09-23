@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { Fragment, useRef, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export default function HoverFollow({
@@ -11,6 +11,7 @@ export default function HoverFollow({
   const followerElRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [followerKey, setFollowerKey] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -44,6 +45,7 @@ export default function HoverFollow({
 
   const handleMouseEnter = useCallback(
     (e: React.MouseEvent) => {
+      setFollowerKey((currentKey) => currentKey + 1);
       if (followerElRef.current) {
         followerElRef.current.style.display = 'block';
       }
@@ -68,7 +70,7 @@ export default function HoverFollow({
       className="pointer-events-none fixed left-0 top-0 z-9999 hidden"
       aria-hidden="true"
     >
-      {follower}
+      <Fragment key={followerKey}>{follower}</Fragment>
     </div>
   );
 
