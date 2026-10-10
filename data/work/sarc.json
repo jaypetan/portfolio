@@ -1,6 +1,7 @@
 {
-  "company": "Satellite Research Centre",
-  "jobTitle": "Web Developer",
+  "title": "Satellite Research Centre",
+  "subtitle": "Web Developer",
+  "categoryLabel": "Work experience",
   "languages": ["HTML", "CSS", "JavaScript", "HTMX"],
   "contributions": [
     "Redesigned the legacy Satellite Mission Planner into a high-fidelity web app using HTML, CSS, JavaScript, and HTMX with a strong emphasis on frontend architecture.",

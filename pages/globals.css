@@ -17,7 +17,7 @@
 
 @layer components {
   /* Shared labels for work experience, languages, contributions, and showcase. */
-  .work-section-heading {
+  .project-section-heading {
     font-family: inherit;
     @apply text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400;
   }
@@ -86,15 +86,10 @@
     }
   }
 
-  .work-page-content {
-    /* Shared content width for all work pages. The visual header stays full width. */
-    max-width: 1200px;
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .work-header-artwork .scroll-up,
-    .work-header-artwork .scroll-down,
-    .work-header-artwork .sarc-mouse-drift {
+    .project-header-artwork .scroll-up,
+    .project-header-artwork .scroll-down,
+    .project-header-artwork .sarc-mouse-drift {
       animation: none;
     }
   }

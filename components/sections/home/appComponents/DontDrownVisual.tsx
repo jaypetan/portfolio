@@ -5,8 +5,10 @@ import ShowcaseTitleOverlay from '@/components/ui/HoverComponents/ShowcaseTitleO
 function getYouTubeEmbedUrl(videoUrl: string) {
   try {
     const url = new URL(videoUrl);
+    const hostname = url.hostname.replace(/^www\./, '');
+    if (!['youtu.be', 'youtube.com', 'youtube-nocookie.com'].includes(hostname)) return null;
     const videoId =
-      url.hostname === 'youtu.be'
+      hostname === 'youtu.be'
         ? url.pathname.slice(1)
         : url.searchParams.get('v') ?? url.pathname.split('/').pop();
 
@@ -19,20 +21,42 @@ function getYouTubeEmbedUrl(videoUrl: string) {
 interface DontDrownVisualProps {
   videoUrl?: string;
   iconSrc: string;
+  variant?: 'preview' | 'header';
 }
 
-export default function DontDrownVisual({ videoUrl, iconSrc }: DontDrownVisualProps) {
+export default function DontDrownVisual({
+  videoUrl,
+  iconSrc,
+  variant = 'preview',
+}: DontDrownVisualProps) {
   const embedUrl = videoUrl ? getYouTubeEmbedUrl(videoUrl) : null;
+  const directVideoSrc = videoUrl && !embedUrl ? videoUrl : null;
   const videoId = embedUrl?.split('/').pop();
   const videoSrc = videoId
     ? `${embedUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&fs=0&rel=0&playsinline=1&enablejsapi=1`
     : null;
 
   return (
-    <ShowcaseBoundedFrame className="rounded-2xl bg-[#002E45]" contentClassName="min-h-56">
+    <ShowcaseBoundedFrame
+      variant={variant}
+      className={variant === 'preview' ? 'rounded-2xl bg-[#002E45]' : 'bg-[#002E45]'}
+      contentClassName={variant === 'preview' ? 'min-h-56' : ''}
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(45,212,191,0.24),transparent_42%),linear-gradient(160deg,#083b56,#001923)]" />
-      <div className="absolute bottom-0 left-0 h-20 w-full bg-[linear-gradient(180deg,transparent,rgba(0,10,18,0.8))]" />
-      {videoSrc ? (
+      {directVideoSrc ? (
+        // Direct video files play without YouTube overlays or native controls.
+        <video
+          src={directVideoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          preload="metadata"
+          aria-label="Don't Drown gameplay video"
+          className="pointer-events-none absolute inset-0 z-10 h-full w-full object-cover"
+        />
+      ) : videoSrc ? (
         <div className="absolute inset-0 z-10">
           <iframe
             src={videoSrc}
@@ -56,7 +80,9 @@ export default function DontDrownVisual({ videoUrl, iconSrc }: DontDrownVisualPr
           </div>
         </div>
       )}
-      <ShowcaseTitleOverlay title="Don't Drown" subtitle="Game project" />
+      {variant === 'preview' ? (
+        <ShowcaseTitleOverlay title="Don't Drown" subtitle="Game Project" />
+      ) : null}
     </ShowcaseBoundedFrame>
   );
 }

@@ -199,33 +199,33 @@ There is currently no automated test script in `package.json`.
 
 ## Work page template
 
-All three work routes use `components/sections/work/WorkPageTemplate.tsx`.
+All work and project routes use `components/sections/shared/ProjectPageTemplate.tsx`.
 
-| File                                            | Purpose                                                                                                         |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `components/sections/work/WorkPageTemplate.tsx` | Composes page metadata, header, description, and showcase slot.                                                 |
-| `components/sections/work/WorkHeader.tsx`       | Full-width visual header, using the same artwork as the dock hover preview.                                     |
-| `components/sections/work/WorkDescription.tsx`  | Company and role on the left, language badges on the right, then contribution bullets. Stacks on small screens. |
-| `components/sections/work/WorkShowcase.tsx`     | Renders the JSON bento sections.                                                                                |
-| `data/work/metev.json`                          | Editable MetEV content.                                                                                         |
-| `data/work/mentaiya.json`                       | Editable Mentai-ya content.                                                                                     |
-| `data/work/sarc.json`                           | Editable SARC content.                                                                                          |
+| File                                                   | Purpose                                                                                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `components/sections/shared/ProjectPageTemplate.tsx` | Composes page metadata, header, description, and showcase slot.                                                 |
+| `components/sections/shared/ProjectHeader.tsx`       | Full-width visual header, using the same artwork as the dock hover preview.                                     |
+| `components/sections/shared/ProjectDescription.tsx`  | Company and role on the left, language badges on the right, then contribution bullets. Stacks on small screens. |
+| `components/sections/shared/ProjectShowcase.tsx`     | Renders the JSON bento sections.                                                                                |
+| `data/work/metev.json`                                 | Editable MetEV content.                                                                                         |
+| `data/work/mentaiya.json`                              | Editable Mentai-ya content.                                                                                     |
+| `data/work/sarc.json`                                  | Editable SARC content.                                                                                          |
 
-Each JSON file has `company`, `jobTitle`, `languages`, `contributions`, `showcaseTitle`, `showcaseDescription`, and `bentoSections`. The language and contribution arrays currently have three placeholders each; replace them with your real details. These files are imported by the corresponding work routes, so production content changes require a rebuild/deployment.
+Each JSON file has `title`, `subtitle`, `categoryLabel`, `languages`, `contributions`, and `bentoSections`. Work data lives in `data/work/`; project data lives in `data/projects/`. The language and contribution arrays currently have three placeholders each; replace them with your real details. These files are imported by the corresponding work routes, so production content changes require a rebuild/deployment.
 
-The description and showcase use a shared **1,200px maximum width**. Change `max-width` on `.work-page-content` in `pages/globals.css` to adjust all work pages together. The artwork header stays full width, with a height of one-third of the viewport on smaller devices and half the viewport on screens at least 1,024px wide (`h-[33.333svh] lg:h-[50svh]`).
+The description and showcase use a shared **1,200px maximum width**. Change `max-width` on `.project-page-content` in `pages/globals.css` to adjust all work pages together. The artwork header stays full width, with a height of one-third of the viewport on smaller devices and half the viewport on screens at least 1,024px wide (`h-[33.333svh] lg:h-[50svh]`).
 
 The work visuals accept `variant="header"` for the larger artwork layout, hiding their small preview title overlays. The default `variant="preview"` keeps the dock's compact presentation. Both modes use the same image imports. Header animations stop when the user requests reduced motion.
 
 Work pages pass their JSON data and visual header to the template:
 
 ```tsx
-<WorkPageTemplate work={work} header={<MetevVisual variant="header" />} />
+<ProjectPageTemplate project={project} header={<MetevVisual variant="header" />} />
 ```
 
 ### Bento showcase layouts and media
 
-`WorkShowcase.tsx` renders the section. The `components/sections/work/showcase/` folder contains `BentoGrid.tsx`, which lays out each JSON section, and `BentoMediaCard.tsx`, which renders each image/video with a black caption badge. Empty `src` values show neutral placeholders with their captions.
+`ProjectShowcase.tsx` renders the section. The `components/sections/shared/showcase/` folder contains `BentoGrid.tsx`, which lays out each JSON section, and `BentoMediaCard.tsx`, which renders each image/video with a black caption badge. Empty `src` values show neutral placeholders with their captions.
 
 Edit `bentoSections` in the same `data/work/*.json` files:
 
@@ -277,3 +277,17 @@ SARC uses `visual.background.src`/`alt` for its interface artwork and `visual.cu
 Each item in a work JSON file can include `hoverText`, separate from its short `description` caption. Replace the placeholder text to customise the details shown when hovering or focusing a card. On touch devices, tap a card to focus it. Omit `hoverText` or set it to an empty string to disable the text box for that card.
 
 `BentoTooltip.tsx` renders the text box outside the clipped card. It follows the pointer, stays within a 16px viewport margin, and has a 352px maximum width (`max-w-88`). Its height is limited to the viewport and long text can scroll. Escape, leaving the card, losing focus, or scrolling the page dismisses it.
+
+### Shared work and project template
+
+`components/sections/shared/` contains `ProjectPageTemplate`, `ProjectHeader`, `ProjectDescription`, `ProjectShowcase`, and the `showcase/` bento components. All five work/project pages use this shared template. `categoryLabel` sets the small label above the title, such as "Work experience" or "Project". Project JSON files currently contain placeholder languages and contributions and empty `bentoSections` arrays for you to fill in.
+
+Pass custom page content as `children` to render it after the showcase, within the same content width:
+
+```tsx
+<ProjectPageTemplate project={project} header={<YourVisual variant="header" />}>
+  <YourCustomSection />
+</ProjectPageTemplate>
+```
+
+Shared CSS uses `.project-page-content`, `.project-section-heading`, and `.project-header-artwork` for both work and project pages.

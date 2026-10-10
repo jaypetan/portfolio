@@ -17,7 +17,7 @@ export default function ShowcaseBoundedFrame({
     <div
       className={`${
         variant === 'header'
-          ? 'w-full overflow-hidden bg-slate-950/50'
+          ? 'w-full overflow-hidden'
           : 'mx-auto w-[calc(100vw-2rem)] max-w-135 overflow-hidden bg-slate-950/40 p-2 px-4 shadow-lg'
       } ${className}`.trim()}
     >

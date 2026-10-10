@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 export default function App({ Component, pageProps, router }: AppProps) {
   const reduceMotion = useReducedMotion();
   const [settledPath, setSettledPath] = useState(router.pathname);
-  const isSliding = settledPath !== router.pathname;
+  const isSliding = settledPath !== router.pathname; // If isSliding is true, we are in the middle of a page transition, so hide scrollbar
 
   const direction = router.pathname === '/' ? -1 : 1; // Will slide in from the left for home page
   const slideVariants = {

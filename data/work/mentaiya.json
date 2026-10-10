@@ -1,6 +1,7 @@
 {
-  "company": "Mentai-Ya",
-  "jobTitle": "Web Developer",
+  "title": "Mentai-Ya",
+  "subtitle": "Web Developer",
+  "categoryLabel": "Work experience",
   "languages": ["React", "Tailwind CSS", "JavaScript"],
   "contributions": [
     "Created a responsive website using Vite, React, and TailwindCSS.",

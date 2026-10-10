@@ -1,6 +1,7 @@
 {
-  "company": "Met EV",
-  "jobTitle": "Web Developer",
+  "title": "Met EV",
+  "subtitle": "Web Developer",
+  "categoryLabel": "Work experience",
   "languages": ["Next.js", "Tailwind CSS", "TypeScript"],
   "contributions": [
     "Engineered user-centric frontend components with Next.js and TailwindCSS",

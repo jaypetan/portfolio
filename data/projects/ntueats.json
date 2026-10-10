@@ -1,0 +1,12 @@
+{
+  "title": "NTUeats",
+  "subtitle": "Mobile app project",
+  "categoryLabel": "Project",
+  "languages": ["Language one", "Language two", "Language three"],
+  "contributions": [
+    "Add a short description of your first contribution here.",
+    "Describe another feature, responsibility, or improvement you worked on.",
+    "Share a result or highlight from this project."
+  ],
+  "bentoSections": []
+}

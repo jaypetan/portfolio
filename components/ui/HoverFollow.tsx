@@ -14,10 +14,15 @@ export default function HoverFollow({
   const [followerKey, setFollowerKey] = useState(0);
 
   useEffect(() => {
+    // Portals need document.body, which is only available in the browser.
     setMounted(true);
-    return () => setMounted(false);
+    return () => {
+      // Cancel pending movement on unmount.
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
+  // Set the position of the floating preview
   const setPosition = useCallback((x: number, y: number) => {
     const follower = followerElRef.current;
     if (!follower) return;
@@ -26,25 +31,32 @@ export default function HoverFollow({
     const margin = 16;
     const width = follower.offsetWidth || 320;
     const height = follower.offsetHeight || 220;
+    // Keep the preview within the left and right screen edges.
     const minX = width / 2 + margin;
     const maxX = window.innerWidth - width / 2 - margin;
     const clampedX = Math.min(Math.max(x, minX), maxX);
     const clampedY = Math.max(y + offsetY, height / 2 + margin);
 
+    // Center the preview above the pointer.
     follower.style.transform = `translate(${clampedX}px, ${clampedY}px) translate(-50%, -100%)`;
   }, []);
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      // Ignore touch input, including on devices that also have a mouse.
+      if (e.pointerType !== 'mouse') return;
       const { clientX: x, clientY: y } = e;
+      // Apply only the latest pointer position on the next animation frame.
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => setPosition(x, y));
     },
     [setPosition],
   );
 
-  const handleMouseEnter = useCallback(
-    (e: React.MouseEvent) => {
+  const handlePointerEnter = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      // Remount preview content so its animations restart on each hover.
       setFollowerKey((currentKey) => currentKey + 1);
       if (followerElRef.current) {
         followerElRef.current.style.display = 'block';
@@ -54,7 +66,8 @@ export default function HoverFollow({
     [setPosition],
   );
 
-  const handleMouseLeave = useCallback(() => {
+  const hideFollower = useCallback(() => {
+    // Stop pending movement before hiding the preview.
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -76,12 +89,18 @@ export default function HoverFollow({
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onPointerMove={handlePointerMove}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={hideFollower}
+      onPointerCancel={hideFollower}
+      onPointerDown={(event) => {
+        if (event.pointerType !== 'mouse') hideFollower();
+      }}
+      onClick={hideFollower}
     >
       {children}
-      {mounted && typeof document !== 'undefined' ? createPortal(portal, document.body) : null}
+      {/* Render outside the layout to avoid clipping. Touch events never show it. */}
+      {mounted ? createPortal(portal, document.body) : null}
     </div>
   );
 }

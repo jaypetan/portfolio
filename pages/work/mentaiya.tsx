@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
-import WorkPageTemplate from '@/components/sections/work/WorkPageTemplate';
+import ProjectPageTemplate from '@/components/sections/shared/ProjectPageTemplate';
 import MentaiyaVisual from '@/components/sections/home/appComponents/MentaiyaVisual';
 import work from '@/data/work/mentaiya.json';
 
 const MentaiyaPage: NextPage = () => {
-  return <WorkPageTemplate work={work} header={<MentaiyaVisual variant="header" />} />;
+  return <ProjectPageTemplate project={work} header={<MentaiyaVisual variant="header" />} />;
 };
 
 export default MentaiyaPage;
