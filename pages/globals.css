@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 @import 'tailwindcss';
 
+/* Match next-themes, which toggles the dark class on the HTML element. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   line-height: 1.5;
   font-weight: 400;
@@ -13,6 +16,89 @@
 }
 
 @layer components {
+  /* Shared labels for work experience, languages, contributions, and showcase. */
+  .work-section-heading {
+    font-family: inherit;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .bento-media-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      gap: 16px;
+      aspect-ratio: 8 / 5;
+      grid-auto-rows: minmax(0, 1fr);
+    }
+
+    .bento-grid[data-layout='split'] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
+
+    .bento-grid[data-layout='mosaic'] {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+    }
+
+    .bento-grid .bento-media-card {
+      aspect-ratio: auto;
+      min-height: 0;
+    }
+
+    .bento-grid[data-layout='split'] .bento-slot-1 {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .bento-grid[data-layout='split'] .bento-slot-2 {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .bento-grid[data-layout='split'] .bento-slot-3 {
+      grid-area: 1 / 2 / 3 / 3;
+    }
+
+    .bento-grid[data-layout='mosaic'] .bento-slot-1 {
+      grid-area: 1 / 1 / 3 / 2;
+    }
+    .bento-grid[data-layout='mosaic'] .bento-slot-2 {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .bento-grid[data-layout='mosaic'] .bento-slot-3 {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .bento-grid[data-layout='mosaic'] .bento-slot-4 {
+      grid-area: 3 / 1 / 5 / 3;
+    }
+    .bento-grid[data-layout='mosaic'] .bento-slot-5 {
+      grid-area: 1 / 3 / 5 / 5;
+    }
+
+    .bento-grid .bento-extra {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  .work-page-content {
+    /* Shared content width for all work pages. The visual header stays full width. */
+    max-width: 1200px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-header-artwork .scroll-up,
+    .work-header-artwork .scroll-down,
+    .work-header-artwork .sarc-mouse-drift {
+      animation: none;
+    }
+  }
+
   .glassmorphism {
     border-radius: 16px;
     background: rgba(192, 192, 192, 0.1);
@@ -92,7 +178,7 @@
     width: max-content;
     min-width: 0;
     max-width: 100%;
-    animation: scroll-up 8s linear infinite;
+    animation: scroll-up var(--scroll-duration, 8s) linear infinite;
   }
 
   .scroll-down {
@@ -102,7 +188,7 @@
     width: max-content;
     min-width: 0;
     max-width: 100%;
-    animation: scroll-down 8s linear infinite;
+    animation: scroll-down var(--scroll-duration, 8s) linear infinite;
   }
 
   @keyframes sarc-mouse-drift {

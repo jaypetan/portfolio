@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import ShowcaseBoundedFrame from '@/components/ui/HoverComponents/ShowcaseBoundedFrame';
 import ShowcaseTitleOverlay from '@/components/ui/HoverComponents/ShowcaseTitleOverlay';
-import dontDrownLogo from '@/images/projects/DontDrownLogo.png';
 
 function getYouTubeEmbedUrl(videoUrl: string) {
   try {
@@ -17,11 +16,12 @@ function getYouTubeEmbedUrl(videoUrl: string) {
   }
 }
 
-interface DontDrownShowcaseProps {
+interface DontDrownVisualProps {
   videoUrl?: string;
+  iconSrc: string;
 }
 
-export default function DontDrownShowcase({ videoUrl }: DontDrownShowcaseProps) {
+export default function DontDrownVisual({ videoUrl, iconSrc }: DontDrownVisualProps) {
   const embedUrl = videoUrl ? getYouTubeEmbedUrl(videoUrl) : null;
   const videoId = embedUrl?.split('/').pop();
   const videoSrc = videoId
@@ -44,7 +44,7 @@ export default function DontDrownShowcase({ videoUrl }: DontDrownShowcaseProps) 
       ) : (
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-3 px-8 pb-8 pt-4 text-center text-white">
           <Image
-            src={dontDrownLogo}
+            src={iconSrc}
             alt="Don't Drown"
             width={180}
             height={180}

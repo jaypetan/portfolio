@@ -1,0 +1,63 @@
+{
+  "company": "Satellite Research Centre",
+  "jobTitle": "Web Developer",
+  "languages": ["HTML", "CSS", "JavaScript", "HTMX"],
+  "contributions": [
+    "Redesigned the legacy Satellite Mission Planner into a high-fidelity web app using HTML, CSS, JavaScript, and HTMX with a strong emphasis on frontend architecture.",
+    "Collaborated on REST API design with FastAPI for seamless frontend-backend communication."
+  ],
+  "bentoSections": [
+    {
+      "id": "mission-planner",
+      "layout": "split",
+      "items": [
+        {
+          "id": "dashboard-grid-layout",
+          "description": "Dashboard grid layout",
+          "media": {
+            "type": "image",
+            "src": "/work/sarc/showcase/dashboard-grid-layout.png",
+            "alt": "SARC mission planner grid with satellite selection, a globe, and a clock",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I built a drag-and-drop grid that lets users arrange and view multiple interfaces at once."
+        },
+        {
+          "id": "cesium-globe-visualization",
+          "description": "CesiumJS globe visualization",
+          "media": {
+            "type": "video",
+            "src": "/work/sarc/showcase/cesium-globe-visualization.mp4",
+            "alt": "SARC mission planner CesiumJS globe demonstration",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I learned and integrated CesiumJS to display a basic interactive globe within the mission planner."
+        },
+        {
+          "id": "design-iterations",
+          "description": "Four design iterations",
+          "media": {
+            "type": "image",
+            "src": "/work/sarc/showcase/design-iterations.png",
+            "alt": "Four versions of the SARC mission planner, from wireframe to dashboard",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I refined the interface through four high-fidelity iterations based on feedback. Looking back, low-fidelity prototypes would have helped me test ideas faster, but rebuilding the interface gave me valuable practice in web development."
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "background": {
+      "src": "/work/sarc/visuals/mission-planner-background.png",
+      "alt": "SARC mission planner interface"
+    },
+    "cursorSrc": "/work/sarc/visuals/cursor-overlay.png"
+  }
+}

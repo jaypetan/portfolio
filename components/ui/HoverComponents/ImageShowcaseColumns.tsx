@@ -11,6 +11,7 @@ interface ImageShowcaseColumnsProps {
   heightClassName?: string;
   containerClassName?: string;
   className?: string;
+  variant?: 'preview' | 'header';
 }
 
 export default function ImageShowcaseColumns({
@@ -18,10 +19,15 @@ export default function ImageShowcaseColumns({
   heightClassName = 'h-64',
   containerClassName = 'flex flex-row gap-4',
   className = '',
+  variant = 'preview',
 }: ImageShowcaseColumnsProps) {
   return (
     <div
-      className={`mx-auto w-[calc(100vw-2.5rem)] max-w-135 overflow-hidden bg-transparent p-0 shadow-none sm:w-auto ${className} ${containerClassName}`.trim()}
+      className={`${
+        variant === 'header'
+          ? 'flex h-full w-full gap-3 overflow-hidden bg-transparent px-3 sm:gap-6 sm:px-6'
+          : `mx-auto w-[calc(100vw-2.5rem)] max-w-135 overflow-hidden bg-transparent p-0 shadow-none sm:w-auto ${containerClassName}`
+      } ${className}`.trim()}
     >
       {columns.map((column, index) => (
         <InfiniteImageLoop
@@ -31,7 +37,8 @@ export default function ImageShowcaseColumns({
           imageWidth={column.imageWidth ?? 160}
           itemClassName={`overflow-hidden ${column.itemClassName ?? ''}`.trim()}
           imageClassName={column.imageClassName ?? 'w-full object-cover'}
-          className={heightClassName}
+          className={variant === 'header' ? 'h-full min-w-0 flex-1' : heightClassName}
+          responsive={variant === 'header'}
         />
       ))}
     </div>

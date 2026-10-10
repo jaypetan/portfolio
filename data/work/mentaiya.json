@@ -1,0 +1,125 @@
+{
+  "company": "Mentai-Ya",
+  "jobTitle": "Web Developer",
+  "languages": ["React", "Tailwind CSS", "JavaScript"],
+  "contributions": [
+    "Created a responsive website using Vite, React, and TailwindCSS.",
+    "Handled web design, development and maintenance, focusing on an attractive and user-friendly frontend.",
+    "Facilitated multiple design reviews, leveraging user feedback to refine the UI/UX and ensure the final product aligned with the business vision."
+  ],
+  "bentoSections": [
+    {
+      "id": "website-features",
+      "layout": "mosaic",
+      "items": [
+        {
+          "id": "instagram-feed",
+          "description": "Instagram feed",
+          "media": {
+            "type": "image",
+            "src": "/work/mentaiya/showcase/instagram-feed.png",
+            "alt": "Mentai-Ya website showing an embedded Instagram feed",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I integrated an Elfsight widget to display the latest updates from Mentai-Ya's Instagram, helping visitors stay connected with the brand."
+        },
+        {
+          "id": "contact-form",
+          "description": "Direct-to-email form",
+          "media": {
+            "type": "image",
+            "src": "/work/mentaiya/showcase/contact-form.png",
+            "alt": "Mentai-Ya contact form with name, phone, email, and message fields",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I used the Resend API to send website enquiries directly to the company's inbox, making it easier for customers to get in touch."
+        },
+        {
+          "id": "image-carousel",
+          "description": "Image carousel",
+          "media": {
+            "type": "video",
+            "src": "/work/mentaiya/showcase/image-carousel.mp4",
+            "alt": "Mentai-Ya image carousel demonstration",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I built a continuously scrolling carousel to showcase best-selling dishes and help visitors explore the menu."
+        },
+        {
+          "id": "store-locator",
+          "description": "Store locator",
+          "media": {
+            "type": "video",
+            "src": "/work/mentaiya/showcase/store-locator.mp4",
+            "alt": "Mentai-Ya store locations interface demonstration",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I designed and developed a clear layout to help customers find Mentai-Ya's stall locations."
+        },
+        {
+          "id": "responsive-design",
+          "description": "Responsive design",
+          "media": {
+            "type": "image",
+            "src": "/work/mentaiya/showcase/responsive-design.png",
+            "alt": "Mentai-Ya homepage displayed in desktop and mobile layouts",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I checked and refined the website across screen sizes before deployment to ensure a consistent experience on phones, tablets, and desktops."
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "columns": [
+      {
+        "direction": "up",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/mentaiya/visuals/careers-page.png",
+            "alt": "Mentai-Ya careers page"
+          },
+          {
+            "src": "/work/mentaiya/visuals/reviews-page.png",
+            "alt": "Mentai-Ya customer reviews page"
+          }
+        ]
+      },
+      {
+        "direction": "down",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/mentaiya/visuals/homepage.png",
+            "alt": "Mentai-Ya homepage"
+          }
+        ]
+      },
+      {
+        "direction": "up",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/mentaiya/visuals/about-page.png",
+            "alt": "Mentai-Ya story and about page"
+          },
+          {
+            "src": "/work/mentaiya/visuals/menu-page.png",
+            "alt": "Mentai-Ya menu page"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,189 +1,279 @@
-# Portfolio
+# Portfolio project reference
 
-A modern portfolio website built with **Next.js 14**, **React Three Fiber**, and **TypeScript**.
+A personal portfolio built with Next.js 16, React 18, TypeScript, and Tailwind CSS 4. This project uses the **Pages Router**: files inside `pages/` define routes.
 
-## Features
+## Getting started
 
-- ⚡ **Next.js 14** - Modern React framework with App Router support
-- 🎨 **React Three Fiber** - 3D graphics with Three.js
-- 🎯 **TypeScript** - Type-safe development
-- 💅 **Tailwind CSS** - Utility-first styling
-- 📱 **Responsive Design** - Mobile-first approach
-- 🚀 **Vercel Ready** - Easy deployment
-- 🔄 **GitHub Actions CI/CD** - Automated testing and deployment
+Use **Node.js 24.x**, as specified in `package.json` and the GitHub workflows.
 
-## Project Structure
-
-```
-portfolio/
-├── pages/
-│   ├── _app.tsx          # App wrapper
-│   ├── _document.tsx     # Document wrapper
-│   ├── index.tsx         # Home page
-│   ├── about.tsx         # About page
-│   └── globals.css       # Global styles
-├── components/
-│   ├── Navigation.tsx    # Navigation component
-│   └── Scene3D.tsx       # React Three Fiber 3D scene
-├── styles/
-│   ├── Navigation.module.css
-│   ├── Home.module.css
-│   └── About.module.css
-├── package.json
-├── next.config.js
-├── tsconfig.json
-└── .vercelignore
+```sh
+npm ci
+npm run dev
 ```
 
-## Getting Started
+Open [localhost:3000](http://localhost:3000). `npm ci` installs dependencies from `package-lock.json`. Use `npm install` when intentionally adding or updating dependencies.
 
-### Prerequisites
+For a local production build:
 
-- Node.js 16+ or higher
-- npm or yarn
-
-### Installation
-
-1. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-2. **Run the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-### Build for Production
-
-```bash
+```sh
 npm run build
 npm start
 ```
 
-## Deployment on Vercel
+On Windows PowerShell, if execution policy blocks `npm.ps1` or `npx.ps1`, use `npm.cmd` and `npx.cmd` for the same commands.
 
-The project is ready to deploy on Vercel with zero configuration needed.
+## Folder guide
 
-### Steps to Deploy:
+| Folder                                    | Purpose                                                                             |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- |
+| `pages/`                                  | Route components, application wrapper, document shell, error pages, and global CSS. |
+| `pages/work/`                             | MetEV, Mentai-ya, and SARC pages using the shared work template.                    |
+| `pages/projects/`                         | Don't Drown and NTUeats destination pages. Currently simple placeholders.           |
+| `components/`                             | Shared React components and larger page sections.                                   |
+| `components/layout/`                      | Navigation: the home link and bottom app dock.                                      |
+| `components/sections/home/`               | Homepage layout and supporting components.                                          |
+| `components/sections/home/components/`    | Small homepage-specific elements, currently the lightbulb theme toggle.             |
+| `components/sections/home/appComponents/` | Dock hover visuals. These previews are separate from destination pages.             |
+| `components/ui/`                          | Reusable icons, mouse-following previews, tilted cards, and visual effects.         |
+| `components/ui/HoverComponents/`          | Shared preview frames, title overlays, and scrolling screenshot columns.            |
+| `components/backgrounds/`                 | Animated background implementations.                                                |
+| `images/`                                 | Assets imported by components.                                                      |
+| `images/companies/`                       | Unused company source images kept for future use.                                   |
+| `images/projects/`                        | Former project logo folder; app logos now live in `public/app-icons/`.              |
+| `images/hero/`                            | Homepage profile photo.                                                             |
+| `images/util/`                            | Utility artwork, including the lightbulb SVG.                                       |
+| `public/`                                 | Assets served directly by URL: `public/favicon.svg` becomes `/favicon.svg`.         |
+| `lib/`                                    | Shared helper functions.                                                            |
+| `.github/workflows/`                      | CI and production deployment workflows.                                             |
+| `.vscode/`                                | Local editor settings, including Prettier on save; ignored by Git.                  |
+| `favicon.ico/`                            | A folder containing `Group 6.svg`; the active favicon is in `public/`.              |
+| `.next/`                                  | Generated Next.js development/build output; ignored by Git.                         |
+| `node_modules/`                           | Installed packages; generated by npm and ignored by Git.                            |
+| `.git/`                                   | Repository history and metadata.                                                    |
 
-1. **Push your code to GitHub**
+## Pages and entry points
 
-   ```bash
-   git add .
-   git commit -m "Initial portfolio setup"
-   git push origin main
-   ```
+| File                           | What it does                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `pages/_app.tsx`               | Wraps every page in the theme provider, imports global CSS, keeps navigation visible, and animates route changes. |
+| `pages/_document.tsx`          | Defines the HTML shell, language, favicon, and Next.js script insertion.                                          |
+| `pages/index.tsx`              | The `/` route: sets metadata and combines the liquid background with `HomePage`.                                  |
+| `pages/about.tsx`              | The `/about` route, with introductory text and a skills list.                                                     |
+| `pages/work/metev.tsx`         | The `/work/metev` route.                                                                                          |
+| `pages/work/mentaiya.tsx`      | The `/work/mentaiya` route.                                                                                       |
+| `pages/work/sarc.tsx`          | The `/work/sarc` route.                                                                                           |
+| `pages/projects/dontdrown.tsx` | The `/projects/dontdrown` route.                                                                                  |
+| `pages/projects/ntueats.tsx`   | The `/projects/ntueats` route.                                                                                    |
+| `pages/404.tsx`                | Missing-route page with a link home.                                                                              |
+| `pages/_error.tsx`             | General Next.js error page displaying a status code.                                                              |
+| `pages/globals.css`            | Imports Tailwind and fonts; defines theme colors, glass panels, icon glow, scrolling animations, and base styles. |
 
-2. **Connect to Vercel**
+### Page transitions
 
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Import your GitHub repository
-   - Vercel will auto-detect Next.js and configure everything
-   - Click "Deploy"
+`_app.tsx` uses Motion's `AnimatePresence` and a page wrapper keyed by `router.pathname`.
 
-3. **Your portfolio is live!** 🎉
+- Navigating to other pages slides the current page left and brings the incoming page from the right.
+- Navigating home reverses the direction: the current page exits right and home enters from the left.
+- `custom={direction}` on `AnimatePresence` passes the new direction to the outgoing page as well as the incoming page.
+- `transition={{ type: 'tween' }}` prevents spring bounce, using default tween duration and easing.
+- `initial={false}` prevents an animation on first load.
+- `useReducedMotion()` disables sliding when the user requests reduced motion in device settings.
+- Navigation sits outside the animated wrapper and stays fixed during transitions.
 
-### Environment Variables (if needed)
+## Main components
 
-Create a `.env.local` file in the root directory:
+Theme selection is shared across routes by `ThemeProvider` in `_app.tsx`. The homepage lightbulb updates that shared preference. `globals.css` defines `@custom-variant dark (&:where(.dark, .dark *))` so Tailwind's `dark:` utilities follow the HTML class set by `next-themes`, including when the selected theme differs from the device preference.
 
-```
-# Add your environment variables here
-```
+| File                                                     | What it does                                                                                                                                                                                 |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `components/layout/Navigation.tsx`                       | Defines dock entries, routes, logos, colors, and visuals. Reads the current route, passes it to icons, and renders the fixed home link.                                                      |
+| `components/ui/AppIcon.tsx`                              | Renders a logo linked to its route. If `href` matches `currentPage`, renders a disabled, grayscale, dimmed icon instead of a link.                                                           |
+| `components/ui/HoverFollow.tsx`                          | Shows a follower above the pointer, moves it with the mouse, clamps its horizontal position, and hides it on mouse leave. Uses a portal into `document.body` and animation-frame scheduling. |
+| `components/sections/home/HomePage.tsx`                  | Homepage profile card, developer heading, supporting text, and theme toggle layout.                                                                                                          |
+| `components/sections/home/components/Light.tsx`          | Lightbulb control switching between dark and light themes.                                                                                                                                   |
+| `components/ThemeProvider.tsx`                           | Wrapper around `next-themes`. `_app.tsx` defaults to the device theme, while preserving a saved user preference.                                                                             |
+| `components/ui/TiltedCard.tsx`                           | Pointer-driven image tilt, spring motion, and overlay content; used for the profile photo.                                                                                                   |
+| `components/ui/ShapeBlur.tsx`                            | Reusable Three.js shader-based shape/blur effect.                                                                                                                                            |
+| `components/backgrounds/LiquidEtherBackground.tsx`       | Interactive liquid background used by the homepage; its options are set in `pages/index.tsx`.                                                                                                |
+| `components/backgrounds/BackgroundGradientAnimation.tsx` | Alternative animated gradient background.                                                                                                                                                    |
+| `components/Scene3D.tsx`                                 | Experimental React Three Fiber scene with a rotating cube responding to hover and click.                                                                                                     |
+| `lib/utils.ts`                                           | Exports `cn()` to combine conditional classes with `clsx` and resolve Tailwind conflicts with `tailwind-merge`.                                                                              |
 
-## CI/CD with GitHub Actions
+### App visuals
 
-This project includes automated CI/CD workflows:
+The previews in `components/sections/home/appComponents/` are:
 
-- **CI Workflow** - Runs tests and builds on every push/PR
-- **Deploy Workflow** - Automatically deploys to Vercel on `main` branch
+| Component             | Preview                                            |
+| --------------------- | -------------------------------------------------- |
+| `MetevVisual.tsx`     | MetEV screenshot columns and title.                |
+| `MentaiyaVisual.tsx`  | Mentai-ya screenshot columns and title.            |
+| `SarcVisual.tsx`      | SARC background, mouse artwork, and title.         |
+| `DontDrownVisual.tsx` | Don't Drown project preview; accepts a `videoUrl`. |
+| `NTUeatsVisual.tsx`   | NTUeats project preview and title.                 |
 
-### Setup GitHub Actions CI/CD
+Shared building blocks in `components/ui/HoverComponents/`:
 
-See [CI_CD_SETUP.md](./CI_CD_SETUP.md) for complete setup instructions including:
+| Component                  | Purpose                                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `ShowcaseBoundedFrame.tsx` | Responsive clipped frame around preview content.                                                                   |
+| `ShowcaseTitleOverlay.tsx` | Title/subtitle panel over a preview.                                                                               |
+| `ImageShowcaseColumns.tsx` | Arranges screenshot columns and scrolling directions.                                                              |
+| `InfiniteImageLoop.tsx`    | Duplicates an image list for continuous vertical scrolling using the global `scroll-up`/`scroll-down` CSS classes. |
 
-- Setting up Vercel secrets
-- Understanding workflow triggers
-- Monitoring deployments
-- Troubleshooting
+### Current-page state and tooltip flow
 
-Quick start:
+Image loops use a constant pixel speed rather than a fixed loop duration. Adjust the default `speed = 42` (pixels per second) in `components/ui/HoverComponents/InfiniteImageLoop.tsx`, or pass its `speed` prop. Higher values move faster. The component measures half the duplicated track height and calculates duration as distance divided by speed; `ResizeObserver` updates it when images load or resize. The scrolling CSS uses this calculated `--scroll-duration` value.
 
-1. Add `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` secrets to GitHub
-2. Push to `main` branch
-3. Watch workflows run in the Actions tab
+The route is the source of truth; no separate page state needs synchronizing.
 
-## Customization
+1. `Navigation` reads `useRouter().pathname` as `currentPage`.
+2. `AppIcon` compares that value with its own `href`.
+3. The matching icon becomes gray and disabled, keeping the normal cursor.
+4. `Navigation` replaces its visual with **"You are already on this page"**.
+5. `HoverFollow` makes that tooltip follow the mouse; other icons retain their previews.
 
-### Adding New Pages
+## Commands
 
-Create a new file in the `pages/` directory:
+| Command                                | Purpose                                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                          | Runs `next dev` with automatic updates during development.                                                       |
+| `npm run build`                        | Runs `next build`, generating production output in `.next/`.                                                     |
+| `npm start`                            | Runs `next start` to serve an existing production build. Build first.                                            |
+| `npm run lint`                         | Runs ESLint across JavaScript and TypeScript, explicitly using the existing `.eslintrc.json` format.             |
+| `npm run format`                       | Runs Prettier and rewrites formatting throughout the project.                                                    |
+| `npx tsc --noEmit --incremental false` | Checks TypeScript without generating JavaScript or an incremental cache. A direct command, not a package script. |
+
+There is currently no automated test script in `package.json`.
+
+## Configuration files
+
+| File                              | Purpose                                                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package.json`                    | npm scripts, dependencies, and required Node.js major version.                                                                                                          |
+| `package-lock.json`               | Locked dependency tree for reproducible installs.                                                                                                                       |
+| `next.config.js`                  | Next.js configuration, currently enabling React Strict Mode.                                                                                                            |
+| `tsconfig.json`                   | Main TypeScript settings and the `@/*` import alias pointing to the project root.                                                                                       |
+| `tsconfig.node.json`              | Legacy configuration referencing `vite.config.ts`, which is absent. npm scripts use Next.js.                                                                            |
+| `next-env.d.ts`                   | Next.js-generated type references.                                                                                                                                      |
+| `globals.d.ts`                    | Declaration for CSS imports.                                                                                                                                            |
+| `postcss.config.js`               | Loads Tailwind 4's PostCSS plugin and Autoprefixer.                                                                                                                     |
+| `tailwind.config.js`              | Existing custom colors and animation definitions. `globals.css` does not explicitly load it with `@config`; check that wiring before relying on these custom utilities. |
+| `.eslintrc.json`                  | ESLint parser and environment settings.                                                                                                                                 |
+| `.prettierrc` / `.prettierignore` | Formatting settings and formatting exclusions.                                                                                                                          |
+| `.gitignore`                      | Excludes dependencies, build output, environment files, editor settings, and generated files from Git.                                                                  |
+| `vercel.json`                     | Identifies the deployment as a Next.js project.                                                                                                                         |
+| `.vercelignore`                   | Excludes files from Vercel uploads.                                                                                                                                     |
+| `CI_CD_SETUP.md`                  | Existing deployment setup notes; workflow files show the actual configured steps.                                                                                       |
+
+## CI and deployment scripts
+
+- `.github/workflows/ci.yml` runs on pushes and pull requests targeting `main` or `develop`. It installs dependencies, runs lint, builds, and checks for `.next/`. Lint currently has `continue-on-error: true`; no automated test suite runs.
+- `.github/workflows/deploy.yml` runs on pushes to `main`. It validates Vercel secrets, checks project access, pulls production environment information, builds Vercel artifacts, and deploys prebuilt output to production.
+- Deployment expects GitHub secrets named `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
+
+## Quick editing reference
+
+| Change                                        | Edit                                                       |
+| --------------------------------------------- | ---------------------------------------------------------- |
+| Homepage text, layout, profile card           | `components/sections/home/HomePage.tsx`                    |
+| Homepage background options                   | `pages/index.tsx`                                          |
+| Liquid background implementation              | `components/backgrounds/LiquidEtherBackground.tsx`         |
+| Dock entries, destinations, preview selection | `components/layout/Navigation.tsx`                         |
+| Icon appearance and disabled behavior         | `components/ui/AppIcon.tsx`                                |
+| Mouse-following preview position              | `setPosition()` in `components/ui/HoverFollow.tsx`         |
+| Current-page tooltip message                  | `currentPageTooltip` in `components/layout/Navigation.tsx` |
+| Slide direction and transition                | `pages/_app.tsx`                                           |
+| Global styles and animation keyframes         | `pages/globals.css`                                        |
+| Work/project page content                     | Matching file in `pages/work/` or `pages/projects/`        |
+| Hover preview content                         | Matching file in `components/sections/home/appComponents/` |
+| Browser tab title/description                 | Route's `next/head` content                                |
+| Favicon                                       | `public/favicon.svg` and `pages/_document.tsx`             |
+
+### Adding a dock app
+
+1. Create a default-exported page component in `pages/work/` or `pages/projects/`.
+2. Add its logo to `public/app-icons/`; add JSON-managed screenshots/videos to `public/work/`.
+3. Create a visual in `components/sections/home/appComponents/` using shared preview components.
+4. Add an entry to the `work` or `projects` array in `data/navigation.json`. Import its visual component and register its `id` in `renderVisual()` in `Navigation.tsx`.
+5. Match `href` exactly to the route. Existing current-page state and transitions apply automatically.
+
+## Work page template
+
+All three work routes use `components/sections/work/WorkPageTemplate.tsx`.
+
+| File                                            | Purpose                                                                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `components/sections/work/WorkPageTemplate.tsx` | Composes page metadata, header, description, and showcase slot.                                                 |
+| `components/sections/work/WorkHeader.tsx`       | Full-width visual header, using the same artwork as the dock hover preview.                                     |
+| `components/sections/work/WorkDescription.tsx`  | Company and role on the left, language badges on the right, then contribution bullets. Stacks on small screens. |
+| `components/sections/work/WorkShowcase.tsx`     | Renders the JSON bento sections.                                                                                |
+| `data/work/metev.json`                          | Editable MetEV content.                                                                                         |
+| `data/work/mentaiya.json`                       | Editable Mentai-ya content.                                                                                     |
+| `data/work/sarc.json`                           | Editable SARC content.                                                                                          |
+
+Each JSON file has `company`, `jobTitle`, `languages`, `contributions`, `showcaseTitle`, `showcaseDescription`, and `bentoSections`. The language and contribution arrays currently have three placeholders each; replace them with your real details. These files are imported by the corresponding work routes, so production content changes require a rebuild/deployment.
+
+The description and showcase use a shared **1,200px maximum width**. Change `max-width` on `.work-page-content` in `pages/globals.css` to adjust all work pages together. The artwork header stays full width, with a height of one-third of the viewport on smaller devices and half the viewport on screens at least 1,024px wide (`h-[33.333svh] lg:h-[50svh]`).
+
+The work visuals accept `variant="header"` for the larger artwork layout, hiding their small preview title overlays. The default `variant="preview"` keeps the dock's compact presentation. Both modes use the same image imports. Header animations stop when the user requests reduced motion.
+
+Work pages pass their JSON data and visual header to the template:
 
 ```tsx
-// pages/projects.tsx
-import type { NextPage } from 'next';
-
-const Projects: NextPage = () => {
-  return <main>Projects Page</main>;
-};
-
-export default Projects;
+<WorkPageTemplate work={work} header={<MetevVisual variant="header" />} />
 ```
 
-Update the navigation in `components/Navigation.tsx` to link to the new page.
+### Bento showcase layouts and media
 
-### Modifying the 3D Scene
+`WorkShowcase.tsx` renders the section. The `components/sections/work/showcase/` folder contains `BentoGrid.tsx`, which lays out each JSON section, and `BentoMediaCard.tsx`, which renders each image/video with a black caption badge. Empty `src` values show neutral placeholders with their captions.
 
-Edit `components/Scene3D.tsx` to add more 3D elements, models, or interactive features:
+Edit `bentoSections` in the same `data/work/*.json` files:
 
-- Change geometries and materials
-- Add animations
-- Load 3D models (glTF, OBJ, etc.)
-- Add physics simulation with `@react-three/rapier`
+- `layout: "split"`: three cards, with two stacked on the left and one tall card on the right. Used for SARC.
+- `layout: "mosaic"`: five cards, with a tall card and two small cards at the upper left, a wide card below them, and one tall card on the right. Used for MetEV and Mentai-ya.
+- At widths below 768px, all cards stack in their JSON order in one column.
+- Add more sections to `bentoSections` to combine layouts on a page. Each section and card should have its own stable `id`.
+- Adjust spacing, desktop proportions, and mobile card aspect ratio in the `.bento-grid` / `.bento-media-card` rules in `pages/globals.css`.
 
-### Styling
+An example card:
 
-- Global styles: `pages/globals.css`
-- Component styles: CSS modules in `styles/` directory
-- Use Tailwind CSS or styled-components if preferred
+```json
+{
+  "id": "checkout-demo",
+  "description": "Checkout page",
+  "media": {
+    "type": "video",
+    "src": "/work/metev/showcase/checkout.mp4",
+    "alt": "Demonstration of the checkout experience",
+    "poster": "/work/metev/showcase/checkout-poster.jpg",
+    "fit": "contain",
+    "position": "center"
+  }
+}
+```
 
-## Available Scripts
+Use `type: "image"` for an image and `type: "video"` for a video. `src` accepts a public asset URL or a full external media URL. For example, put a file at `public/work/metev/showcase/checkout.mp4` to use `/work/metev/showcase/checkout.mp4`. Video links must point to playable media files such as MP4/WebM, rather than YouTube/Vimeo watch pages. `poster` is optional. Use `fit: "cover"` to fill/crop a card or `"contain"` to show the entire media; `position` adjusts the crop alignment.
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
+Videos play muted and loop when visible, without a control panel. They pause when scrolled out of view, when the browser tab is hidden, or when leaving the page. Playback resumes when visible again. Image and video captions share the same bottom-center positioning. Images load lazily.
 
-## Dependencies
+Company showcase assets are grouped in `public/work/<company>/showcase/`: `metev`, `mentaiya`, and `sarc`. Scrolling previews and header artwork live in each company?s adjacent `visuals/` folder. Duplicate original uploads have been removed from `images/companies/`; the JSON references the public assets with descriptive filenames such as `product-photography.jpg`, `contact-form.png`, and `cesium-globe-visualization.mp4`. To replace a live asset, update the file in `public/work/` or point the JSON at its new public URL. All current showcase media use `fit: "cover"` to scale and fill their cards, cropping overflow. Set a card to `"contain"` if you prefer to display the entire image or video.
 
-- **React** - UI library
-- **Next.js** - React framework
-- **Three.js** - 3D graphics library
-- **@react-three/fiber** - React renderer for Three.js
-- **@react-three/drei** - Useful helpers for React Three Fiber
+## App icon data
 
-## Next Steps
+Edit `data/navigation.json` to change dock labels, destinations, background colors, logo URLs, or ordering. Entries are grouped in `work` and `projects`. Each entry contains `id`, `label`, `href`, `backgroundColor`, `iconSrc`, `iconWidth`, and `iconHeight`. Dimensions describe the source image's aspect ratio; the icon still displays at 32px wide on smaller screens and 48px on larger screens. Don't Drown also has an editable `videoUrl` for its hover preview.
 
-1. Customize the content on the home and about pages
-2. Add more pages and sections
-3. Enhance the 3D scene with models and animations
-4. Add a projects showcase page
-5. Integrate a contact form
-6. Add blog functionality if needed
+The five app logos live only in `public/app-icons/`, with URLs such as `/app-icons/metev.png`. Their original files were moved out of `images/`. `AppIcon` accepts these URL strings, and the project hover visuals receive their logo URL from the same JSON. `Navigation.tsx` retains the `renderVisual()` mapping from app IDs to React visual components; that mapping changes only when adding a new visual component.
 
-## License
+### Work visual images
 
-MIT
+The scrolling previews and work headers read image paths from the `visual` field in each company?s `data/work/*.json` file. Images live in `public/work/<company>/visuals/`, with names such as `homepage.png`, `careers-page.png`, and `mission-planner-background.png`. They were moved out of `images/companies/`, so there are no duplicate originals.
 
-## Resources
+For MetEV and Mentai-ya, `visual.columns` contains the scrolling columns. Each column has `direction` (`up` or `down`), `imageWidth` (preview width in pixels), and an `images` array of `src`/`alt` pairs. Headers automatically scale the columns to their available width. Use URLs beginning with `/work/`, without the `public` prefix. Reorder or replace entries here to update both the hover preview and work header.
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Three Fiber Docs](https://docs.pmnd.rs/react-three-fiber/)
-- [Three.js Documentation](https://threejs.org/docs/)
-- [Vercel Deployment Guide](https://vercel.com/docs)
+SARC uses `visual.background.src`/`alt` for its interface artwork and `visual.cursorSrc` for the decorative cursor overlay. Unused company source images remain in `images/companies/` for future use.
+
+### Bento hover details
+
+Each item in a work JSON file can include `hoverText`, separate from its short `description` caption. Replace the placeholder text to customise the details shown when hovering or focusing a card. On touch devices, tap a card to focus it. Omit `hoverText` or set it to an empty string to disable the text box for that card.
+
+`BentoTooltip.tsx` renders the text box outside the clipped card. It follows the pointer, stays within a 16px viewport margin, and has a 352px maximum width (`max-w-88`). Its height is limited to the viewport and long text can scroll. Escape, leaving the card, losing focus, or scrolling the page dismisses it.

@@ -1,0 +1,52 @@
+{
+  "work": [
+    {
+      "id": "metev",
+      "label": "MetEV",
+      "href": "/work/metev",
+      "backgroundColor": "#000000",
+      "iconSrc": "/app-icons/metev.png",
+      "iconWidth": 2640,
+      "iconHeight": 2640
+    },
+    {
+      "id": "mentaiya",
+      "label": "Mentai-Ya",
+      "href": "/work/mentaiya",
+      "backgroundColor": "#FFFFFF",
+      "iconSrc": "/app-icons/mentaiya.png",
+      "iconWidth": 380,
+      "iconHeight": 380
+    },
+    {
+      "id": "sarc",
+      "label": "SARC",
+      "href": "/work/sarc",
+      "backgroundColor": "#0A438D",
+      "iconSrc": "/app-icons/sarc.png",
+      "iconWidth": 520,
+      "iconHeight": 520
+    }
+  ],
+  "projects": [
+    {
+      "id": "dontdrown",
+      "label": "Don't Drown",
+      "href": "/projects/dontdrown",
+      "backgroundColor": "#002E45",
+      "iconSrc": "/app-icons/dont-drown.png",
+      "iconWidth": 1216,
+      "iconHeight": 1068,
+      "videoUrl": "https://youtu.be/skGXpbNtIdw"
+    },
+    {
+      "id": "ntueats",
+      "label": "NTUeats",
+      "href": "/projects/ntueats",
+      "backgroundColor": "#FAE1A0",
+      "iconSrc": "/app-icons/ntu-eats.png",
+      "iconWidth": 1072,
+      "iconHeight": 999
+    }
+  ]
+}

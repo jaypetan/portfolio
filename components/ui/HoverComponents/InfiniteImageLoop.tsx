@@ -12,19 +12,20 @@ interface InfiniteImageLoopProps {
   imageClassName?: string;
   imageWidth?: number;
   loopClassName?: string;
+  responsive?: boolean;
 }
 
 export default function InfiniteImageLoop({
   images,
   direction = 'up',
+  speed = 100,
   className = '',
   itemClassName = '',
   imageClassName = '',
   imageWidth = 160,
   loopClassName = '',
+  responsive = false,
 }: InfiniteImageLoopProps) {
-  if (!images || images.length === 0) return null;
-
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [scrollDuration, setScrollDuration] = useState(12);
 
@@ -34,8 +35,8 @@ export default function InfiniteImageLoop({
 
     const updateDuration = () => {
       const distance = track.scrollHeight / 2;
-      const pixelsPerSecond = 42;
-      const nextDuration = Math.max(4, distance / pixelsPerSecond);
+      const pixelsPerSecond = Number.isFinite(speed) && speed > 0 ? speed : 42;
+      const nextDuration = Math.max(1, distance) / pixelsPerSecond;
       setScrollDuration(nextDuration);
     };
 
@@ -45,7 +46,9 @@ export default function InfiniteImageLoop({
     resizeObserver.observe(track);
 
     return () => resizeObserver.disconnect();
-  }, [images, imageWidth]);
+  }, [images, imageWidth, speed]);
+
+  if (!images || images.length === 0) return null;
 
   const repeatedImages = [...images, ...images];
   const trackClassName = direction === 'up' ? 'scroll-up' : 'scroll-down';
@@ -70,7 +73,7 @@ export default function InfiniteImageLoop({
             <div
               key={`${src}-${index}`}
               className={`shrink-0 overflow-hidden shadow-md ${itemClassName}`.trim()}
-              style={{ width: `${imageWidth}px`, maxWidth: '100%' }}
+              style={{ width: responsive ? '100%' : `${imageWidth}px`, maxWidth: '100%' }}
             >
               <img
                 src={src}

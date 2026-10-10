@@ -1,0 +1,118 @@
+{
+  "company": "Met EV",
+  "jobTitle": "Web Developer",
+  "languages": ["Next.js", "Tailwind CSS", "TypeScript"],
+  "contributions": [
+    "Engineered user-centric frontend components with Next.js and TailwindCSS",
+    "Led the development of the checkout flow through state managements, cookies and form validations.",
+    "Worked in a team of four to build a website for a startup - from ideation and wireframing to final deployment.",
+    "Engaged in inter-departmental brainstorming sessions for the start up."
+  ],
+  "bentoSections": [
+    {
+      "id": "project-highlights",
+      "layout": "mosaic",
+      "items": [
+        {
+          "id": "product-photography",
+          "description": "Product photography",
+          "media": {
+            "type": "image",
+            "src": "/work/metev/showcase/product-photography.jpg",
+            "alt": "MetEV team arranging an electric bicycle for a product photoshoot",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "My role extended beyond development. I worked with other teams on product photography, gathered user feedback, and carried out research to help shape our content decisions."
+        },
+        {
+          "id": "team-brainstorming",
+          "description": "Team brainstorming",
+          "media": {
+            "type": "image",
+            "src": "/work/metev/showcase/team-brainstorming.jpg",
+            "alt": "MetEV team working together around a table with laptops",
+            "poster": "",
+            "fit": "cover",
+            "position": "center 65%"
+          },
+          "hoverText": "We brought our ideas together to set goals and plan the work. We divided responsibilities and merged our work in Git each week to keep development moving smoothly."
+        },
+        {
+          "id": "rmit-showcase",
+          "description": "RMIT showcase",
+          "media": {
+            "type": "image",
+            "src": "/work/metev/showcase/rmit-showcase.jpg",
+            "alt": "MetEV team presenting their project at the RMIT showcase",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "At the RMIT showcase, we spoke with students about MetEV’s goals, answered their questions, and shared what we were working towards."
+        },
+        {
+          "id": "product-checkout",
+          "description": "Product checkout",
+          "media": {
+            "type": "image",
+            "src": "/work/metev/showcase/product-checkout.png",
+            "alt": "MetEV checkout interface with bicycle selection, financing, and color options",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I focused on making the checkout experience feel seamless, using smooth transitions and keeping selections intuitive as users moved through the process."
+        },
+        {
+          "id": "website-components",
+          "description": "Website components",
+          "media": {
+            "type": "image",
+            "src": "/work/metev/showcase/website-components.png",
+            "alt": "MetEV website interface mockups with product features and a laptop preview",
+            "poster": "",
+            "fit": "cover",
+            "position": "center"
+          },
+          "hoverText": "I built reusable components and adapted them for different pages, helping the website feel consistent and making future updates easier."
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "columns": [
+      {
+        "direction": "up",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/metev/visuals/community-page.png",
+            "alt": "MetEV community page"
+          }
+        ]
+      },
+      {
+        "direction": "down",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/metev/visuals/metbike-1-page.png",
+            "alt": "MetEV MetBike 1 product page"
+          }
+        ]
+      },
+      {
+        "direction": "up",
+        "imageWidth": 160,
+        "images": [
+          {
+            "src": "/work/metev/visuals/homepage.png",
+            "alt": "MetEV homepage"
+          }
+        ]
+      }
+    ]
+  }
+}
