@@ -8,5 +8,107 @@
     "Describe another feature, responsibility, or improvement you worked on.",
     "Share a result or highlight from this project."
   ],
-  "bentoSections": []
+  "bentoSections": [],
+  "showcasePages": [
+    {
+      "id": "home",
+      "name": "Home",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/home.png",
+        "alt": "NTUeats Home screen"
+      }
+    },
+    {
+      "id": "nav",
+      "name": "Navigation",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/nav.png",
+        "alt": "NTUeats Navigation screen"
+      }
+    },
+    {
+      "id": "eatwhat",
+      "name": "Eat What",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/eatwhat.png",
+        "alt": "NTUeats Eat What screen"
+      }
+    },
+    {
+      "id": "randomizer",
+      "name": "Food Randomizer",
+      "description": "",
+      "media": {
+        "type": "video",
+        "src": "/project/ntuEats/showcase/randomizer.mp4",
+        "alt": "NTUeats Food Randomizer screen"
+      }
+    },
+    {
+      "id": "stall",
+      "name": "Stall Details",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/stall.png",
+        "alt": "NTUeats Stall Details screen"
+      }
+    },
+    {
+      "id": "recipe",
+      "name": "Recipes",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/recipe.png",
+        "alt": "NTUeats Recipes screen"
+      }
+    },
+    {
+      "id": "recipe-add",
+      "name": "Add a Recipe",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/recipe-add.png",
+        "alt": "NTUeats Add a Recipe screen"
+      }
+    },
+    {
+      "id": "profile",
+      "name": "Profile",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/profile.png",
+        "alt": "NTUeats Profile screen"
+      }
+    },
+    {
+      "id": "report",
+      "name": "Report",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/report.png",
+        "alt": "NTUeats Report screen"
+      }
+    },
+    {
+      "id": "admin",
+      "name": "Admin",
+      "description": "",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/admin.png",
+        "alt": "NTUeats Admin screen"
+      }
+    }
+  ]
 }

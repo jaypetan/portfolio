@@ -7,12 +7,14 @@ import ProjectShowcase from './ProjectShowcase';
 interface ProjectPageTemplateProps {
   project: ProjectPageData;
   header?: ReactNode;
+  showcase?: ReactNode;
   children?: ReactNode;
 }
 
 export default function ProjectPageTemplate({
   project,
   header,
+  showcase,
   children,
 }: ProjectPageTemplateProps) {
   return (
@@ -30,7 +32,7 @@ export default function ProjectPageTemplate({
         {header ? <ProjectHeader>{header}</ProjectHeader> : null}
         <div className="max-w-300 mx-auto w-full px-6 pt-10 pb-48 sm:px-10 sm:pt-16 lg:px-12">
           <ProjectDescription project={project} />
-          <ProjectShowcase sections={project.bentoSections} />
+          {showcase ?? <ProjectShowcase sections={project.bentoSections} />}
           {/* Page-specific content appears after the shared showcase. */}
           {children ? <div className="mt-14 sm:mt-20">{children}</div> : null}
         </div>
