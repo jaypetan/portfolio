@@ -6,7 +6,7 @@ import ProjectShowcase from './ProjectShowcase';
 
 interface ProjectPageTemplateProps {
   project: ProjectPageData;
-  header: ReactNode;
+  header?: ReactNode;
   children?: ReactNode;
 }
 
@@ -27,7 +27,7 @@ export default function ProjectPageTemplate({
         />
       </Head>
       <main className="min-h-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        <ProjectHeader>{header}</ProjectHeader>
+        {header ? <ProjectHeader>{header}</ProjectHeader> : null}
         <div className="max-w-300 mx-auto w-full px-6 pt-10 pb-48 sm:px-10 sm:pt-16 lg:px-12">
           <ProjectDescription project={project} />
           <ProjectShowcase sections={project.bentoSections} />

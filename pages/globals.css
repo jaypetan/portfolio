@@ -39,7 +39,8 @@
       grid-auto-rows: minmax(0, 1fr);
     }
 
-    .bento-grid[data-layout='split'] {
+    .bento-grid[data-layout='split'],
+    .bento-grid[data-layout='quad'] {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: repeat(2, minmax(0, 1fr));
     }

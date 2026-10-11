@@ -1,12 +1,68 @@
 {
   "title": "Don't Drown",
-  "subtitle": "Game project",
+  "subtitle": "Game Design and Development",
   "categoryLabel": "Project",
-  "languages": ["Language one", "Language two", "Language three"],
+  "languages": ["Procreate", "Aseprite", "Unity", "C#"],
   "contributions": [
-    "Add a short description of your first contribution here.",
-    "Describe another feature, responsibility, or improvement you worked on.",
-    "Share a result or highlight from this project."
+    "Designed and developed a 2D submarine thriller in Unity and C#, taking ownership of both art direction and technical implementation.",
+    "Illustrated all game assets, enemies, and background environments from scratch using Procreate and Aseprite.",
+    "Programmed complex enemy mechanics and implemented core user interface navigation."
   ],
-  "bentoSections": []
+  "bentoSections": [
+    {
+      "id": "game-development",
+      "layout": "quad",
+      "items": [
+        {
+          "id": "gameplay-programming",
+          "description": "Gameplay Development",
+          "hoverText": "I developed the game's core mechanics, including player movement, character interactions, enemy attacks, and level progression. I also implemented pop-up interfaces and added music and sound effects to make the gameplay more engaging.",
+          "media": {
+            "type": "image",
+            "src": "/project/dontdrown/showcase/gameplay-programming.png",
+            "alt": "Gameplay development for Don't Drown",
+            "fit": "cover",
+            "position": "center"
+          }
+        },
+
+        {
+          "id": "level-design",
+          "description": "Level Design",
+          "hoverText": "I designed maze-inspired underwater levels with randomized layouts to encourage exploration and keep each playthrough unpredictable. Each level introduces something new, starting with simpler mechanics in Level 1 before gradually adding new enemies, unique abilities, and challenges.",
+          "media": {
+            "type": "image",
+            "src": "/project/dontdrown/showcase/level-design.png",
+            "alt": "Maze-inspired underwater level designs for Don't Drown",
+            "fit": "cover",
+            "position": "center"
+          }
+        },
+        {
+          "id": "environment-design",
+          "description": "Environment Design",
+          "hoverText": "I created reusable pixel-art tilesets in Aseprite to build the game's underwater environments. This allowed me to maintain a consistent visual style while making it easier to design and expand different levels.",
+          "media": {
+            "type": "image",
+            "src": "/project/dontdrown/showcase/environment-design.png",
+            "alt": "Reusable pixel-art tilesets for Don't Drown's underwater environments",
+            "fit": "cover",
+            "position": "center"
+          }
+        },
+        {
+          "id": "character-art",
+          "description": "Character Art & Animation",
+          "hoverText": "I was responsible for all of the game's visual assets and design, including environments, interfaces, characters, and enemies, where I used exaggerated expressions and custom animations to bring the game to life.",
+          "media": {
+            "type": "image",
+            "src": "/project/dontdrown/showcase/character-art.png",
+            "alt": "Hand-drawn characters and enemy animations for Don't Drown",
+            "fit": "cover",
+            "position": "center"
+          }
+        }
+      ]
+    }
+  ]
 }

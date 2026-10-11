@@ -26,7 +26,7 @@ function renderVisual(app: NavigationApp) {
     case 'sarc':
       return <SarcVisual />;
     case 'dontdrown':
-      return <DontDrownVisual iconSrc={app.iconSrc} videoUrl={app.videoUrl} />;
+      return <DontDrownVisual />;
     case 'ntueats':
       return <NTUeatsVisual iconSrc={app.iconSrc} />;
     default:

@@ -7,8 +7,8 @@ export interface BentoSectionData {
 }
 
 export default function BentoGrid({ section }: { section: BentoSectionData }) {
-  const layout = section.layout === 'mosaic' ? 'mosaic' : 'split';
-  const cardCount = layout === 'mosaic' ? 5 : 3;
+  const layout = ['mosaic', 'quad'].includes(section.layout) ? section.layout : 'split';
+  const cardCount = layout === 'mosaic' ? 5 : layout === 'quad' ? 4 : 3;
 
   return (
     <div className="bento-grid" data-layout={layout}>
