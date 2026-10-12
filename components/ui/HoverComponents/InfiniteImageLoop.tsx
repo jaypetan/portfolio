@@ -1,4 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import Image from 'next/image';
+import previewImageSizes from '@/data/previewImageSizes.json';
+
+const imageSizes: Record<string, { width: number; height: number }> = previewImageSizes;
 
 type ImageSource = string | { src: string; alt?: string };
 
@@ -60,10 +64,11 @@ export default function InfiniteImageLoop({
       <div
         ref={trackRef}
         className={`${trackClassName} w-full min-w-0`.trim()}
-        style={{ ['--scroll-duration' as any]: `${scrollDuration}s` }}
+        style={{ '--scroll-duration': `${scrollDuration}s` } as CSSProperties}
       >
         {repeatedImages.map((image, index) => {
           const src = typeof image === 'string' ? image : image.src;
+          const dimensions = imageSizes[src] ?? { width: imageWidth, height: imageWidth };
           const alt =
             typeof image === 'string'
               ? `Loop item ${index + 1}`
@@ -75,9 +80,17 @@ export default function InfiniteImageLoop({
               className={`shrink-0 overflow-hidden shadow-md ${itemClassName}`.trim()}
               style={{ width: responsive ? '100%' : `${imageWidth}px`, maxWidth: '100%' }}
             >
-              <img
+              <Image
                 src={src}
                 alt={alt}
+                width={dimensions.width}
+                height={dimensions.height}
+                sizes={
+                  responsive
+                    ? '(max-width: 640px) 33vw, (max-width: 1024px) 30vw, 480px'
+                    : `${imageWidth}px`
+                }
+                loading="eager"
                 className={`block h-auto w-full max-w-full ${imageClassName}`.trim()}
               />
             </div>

@@ -4,9 +4,11 @@ import { createPortal } from 'react-dom';
 export default function HoverFollow({
   children,
   follower,
+  preloadImages = false,
 }: {
   children: React.ReactNode;
   follower: React.ReactNode;
+  preloadImages?: boolean;
 }) {
   const followerElRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -80,6 +82,7 @@ export default function HoverFollow({
   const portal = (
     <div
       ref={followerElRef}
+      data-preload-images={preloadImages ? '' : undefined}
       className="pointer-events-none fixed left-0 top-0 z-9999 hidden"
       aria-hidden="true"
     >
@@ -89,6 +92,7 @@ export default function HoverFollow({
 
   return (
     <div
+      data-preload-owner={preloadImages ? '' : undefined}
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={hideFollower}

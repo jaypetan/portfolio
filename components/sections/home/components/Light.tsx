@@ -11,7 +11,12 @@ export default function Light() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="relative mx-4 sm:mb-4">
+    <button
+      type="button"
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="relative mx-4 border-0 bg-transparent p-0 sm:mb-4"
+    >
       {/* light */}
       <div
         className={`${
@@ -20,12 +25,11 @@ export default function Light() {
       />
       <Image
         src={Lightbulb}
-        alt="light-toggle"
-        width={0}
-        height={0}
-        className="relative z-20 w-16 -rotate-25 hover:cursor-pointer active:scale-90 md:w-24"
-        onClick={() => setTheme(isDark ? 'light' : 'dark')}
+        alt=""
+        width={96}
+        height={96}
+        className="relative z-20 h-auto w-16 -rotate-25 hover:cursor-pointer active:scale-90 md:w-24"
       />
-    </div>
+    </button>
   );
 }

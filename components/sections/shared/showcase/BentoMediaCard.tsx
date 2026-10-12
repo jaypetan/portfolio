@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useIsPresent } from 'motion/react';
 import BentoTooltip, { type TooltipAnchor } from './BentoTooltip';
 
@@ -91,9 +92,11 @@ function BentoImage({ media }: { media: BentoItemData['media'] }) {
   if (failed) return null;
 
   return (
-    <img
+    <Image
       src={media.src}
       alt={media.alt}
+      fill
+      sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1199px) 50vw, 600px"
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
@@ -138,8 +141,7 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
 
   return (
     <div
-      className={`bento-media-card relative m-0 min-w-0 overflow-hidden rounded-3xl bg-slate-200 focus-visible:outline-2 outline-white/10 outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-500 dark:bg-slate-900   ${className}`}
-      tabIndex={hoverText ? 0 : undefined}
+      className={`bento-media-card relative m-0 min-w-0 overflow-hidden rounded-3xl bg-slate-200 outline-white/10 outline-2 dark:bg-slate-900 ${className}`}
       aria-describedby={hoverText && anchor && isPresent ? tooltipId : undefined}
       onPointerEnter={(event) => {
         setTouchInput(event.pointerType !== 'mouse');
@@ -159,16 +161,6 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
       }}
       onPointerLeave={(event) => {
         if (event.pointerType === 'mouse') setAnchor(null);
-      }}
-      onFocus={(event) => {
-        // Touch focus must not open the floating desktop tooltip.
-        if (!hoverText || !event.currentTarget.matches(':focus-visible')) return;
-        const rect = event.currentTarget.getBoundingClientRect();
-        setAnchor({ x: rect.left, y: rect.bottom });
-      }}
-      onBlur={() => setAnchor(null)}
-      onKeyDown={(event) => {
-        if (event.key === 'Escape') setAnchor(null);
       }}
     >
       <div

@@ -62,7 +62,7 @@ export default function Navigation() {
               href="/"
               aria-label="Go to home"
               title="Home"
-              className="flex h-12 w-12 items-center justify-center glassmorphism-darkbg dark:glassmorphism transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              className="flex h-12 w-12 items-center justify-center glassmorphism-darkbg dark:glassmorphism transition-transform hover:scale-110"
             >
               <House className="h-6 w-6" aria-hidden="true" />
             </Link>
@@ -84,6 +84,7 @@ export default function Navigation() {
               {workExperiences.map((experience) => (
                 <li key={experience.id}>
                   <HoverFollow
+                    preloadImages
                     follower={
                       currentPage === experience.href
                         ? currentPageTooltip
@@ -110,6 +111,7 @@ export default function Navigation() {
               {projects.map((project) => (
                 <li key={project.id}>
                   <HoverFollow
+                    preloadImages
                     follower={
                       currentPage === project.href ? currentPageTooltip : renderVisual(project)
                     }

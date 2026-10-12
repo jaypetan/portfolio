@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { Source_Sans_3, Space_Grotesk } from 'next/font/google';
 import { useState } from 'react';
 import Navigation from '@/components/layout/Navigation';
+import PageImageLoader from '@/components/layout/PageImageLoader';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimatePresence, motion } from 'motion/react';
@@ -54,7 +55,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
               if (definition === 'center') setSettledPath(router.pathname);
             }}
           >
-            <Component {...pageProps} />
+            <PageImageLoader>
+              <Component {...pageProps} />
+            </PageImageLoader>
           </motion.div>
         </AnimatePresence>
       </div>

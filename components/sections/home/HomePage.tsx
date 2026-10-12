@@ -32,7 +32,7 @@ export default function HomePage() {
             showMobileWarning={false}
             displayOverlayContent
             overlayContent={
-              <p className="glassmorphism-darkbg home-introduction">Hi, I'm Jun Peng</p>
+              <p className="glassmorphism-darkbg home-introduction">Hi, I&apos;m Jun Peng</p>
             }
           />
           <div className="home-tagline text-start self-end hidden sm:block">

@@ -8,6 +8,7 @@ export default function DontDrownVisual() {
     <ShowcaseBoundedFrame className="rounded-2xl bg-[#002E45]" contentClassName="min-h-56">
       <Image
         src={mainMenu}
+        loading="eager"
         alt="Don't Drown underwater main menu"
         fill
         sizes="(max-width: 640px) 100vw, 540px"

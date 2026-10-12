@@ -19,6 +19,7 @@ export default function NTUeatsVisual() {
           >
             <Image
               src={cookwhat}
+              loading="eager"
               alt="Cook What"
               width={180}
               height={180}
@@ -33,6 +34,7 @@ export default function NTUeatsVisual() {
           >
             <Image
               src={eatwhat}
+              loading="eager"
               alt="Eat What"
               width={180}
               height={180}
@@ -42,6 +44,7 @@ export default function NTUeatsVisual() {
         </div>
         <Image
           src={cat}
+          loading="eager"
           alt="NTUeats"
           width={180}
           height={180}

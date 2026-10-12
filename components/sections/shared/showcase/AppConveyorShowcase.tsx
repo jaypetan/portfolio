@@ -23,13 +23,13 @@ export default function AppConveyorShowcase({
       style={{ height: `${100 + Math.max(0, pages.length - 1) * 55}svh` }}
     >
       {/* Keep the belt in view while the tall outer section supplies scroll distance. */}
-      <div className="sticky top-0 flex h-svh flex-col pt-6 pb-40 sm:pt-10">
-        <div className="mb-5 flex shrink-0 items-center justify-between gap-4">
+      <div className="sticky top-0 flex h-svh flex-col pt-6 pb-40 sm:pt-10 [@media(orientation:landscape)_and_(max-height:600px)]:pt-3 [@media(orientation:landscape)_and_(max-height:600px)]:pb-36">
+        <div className="mb-5 flex shrink-0 items-center justify-between gap-4 [@media(orientation:landscape)_and_(max-height:600px)]:mb-2">
           <div>
             <h2 id="app-showcase-title" className="project-section-heading">
               Showcase
             </h2>
-            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 [@media(orientation:landscape)_and_(max-height:600px)]:mt-1">
               Scroll down to explore the different components of the app.
             </p>
           </div>
@@ -37,11 +37,18 @@ export default function AppConveyorShowcase({
             {String(selected + 1).padStart(2, '0')} / {String(pages.length).padStart(2, '0')}
           </span>
         </div>
-        <AppConveyorDetails page={pages[selected]} />
-        <div className="min-h-0 w-full flex-1 [container-type:size]">
-          <AppConveyor pages={pages} sectionRef={sectionRef} onSelectionChange={setSelected} />
+        {/* Short landscape screens place details beside the belt to preserve card height. */}
+        <div className="flex min-h-0 flex-1 flex-col [@media(orientation:landscape)_and_(max-height:600px)]:grid [@media(orientation:landscape)_and_(max-height:600px)]:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] [@media(orientation:landscape)_and_(max-height:600px)]:gap-4">
+          <AppConveyorDetails page={pages[selected]} />
+          <div className="min-h-0 min-w-0 w-full flex-1 [container-type:size]">
+            <AppConveyor pages={pages} sectionRef={sectionRef} onSelectionChange={setSelected} />
+          </div>
         </div>
-        {children ? <div className="mt-4 shrink-0">{children}</div> : null}
+        {children ? (
+          <div className="mt-4 shrink-0 [@media(orientation:landscape)_and_(max-height:600px)]:mt-2">
+            {children}
+          </div>
+        ) : null}
       </div>
     </section>
   );

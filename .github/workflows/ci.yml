@@ -27,10 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-        # Check code for formatting and syntax errors.
+        # Check Next.js, React, and TypeScript code quality.
       - name: Run linter
         run: npm run lint
-        continue-on-error: true
 
         # Build the project
       - name: Build

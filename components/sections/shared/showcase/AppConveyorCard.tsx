@@ -19,10 +19,10 @@ export default function AppConveyorCard({
   return (
     <button
       type="button"
-      tabIndex={selected ? 0 : -1}
       onClick={onSelect}
       className={`
               relative w-[min(65vw,320px,28svh,46cqh)] aspect-[1206/2622]
+              [@media(orientation:landscape)_and_(max-height:600px)]:w-[min(320px,40cqw,43cqh)]
               shrink-0 overflow-hidden rounded-2xl border-0 p-0 outline-none
               transition-[filter,opacity,scale] duration-200 ease-linear
               
