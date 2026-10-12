@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD Pipeline
 
 # This workflow runs whenever the code is pushed or pulled to the main or develop branches.
 on:
@@ -6,6 +6,9 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+
+permissions:
+  contents: read
 
 jobs:
   build-and-test:
@@ -39,3 +42,65 @@ jobs:
       - name: Check build output
         run: test -d .next
         shell: bash
+
+  deploy:
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: production-deployment
+      cancel-in-progress: false
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate required secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          for var in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [ -z "${!var}" ]; then
+              echo "Missing required secret: $var"
+              exit 1
+            fi
+          done
+
+      - name: Verify Vercel project access
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          HTTP_CODE=$(curl --silent --show-error --output /dev/null --write-out "%{http_code}" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            "https://api.vercel.com/v9/projects/$VERCEL_PROJECT_ID?teamId=$VERCEL_ORG_ID")
+          echo "Vercel API status: $HTTP_CODE"
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "Vercel project lookup failed. Check the configured Vercel secrets."
+            exit 1
+          fi
+
+      - name: Pull Vercel environment information
+        run: npx --yes vercel@63.1.2 pull --yes --environment=production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Vercel artifacts
+        run: npx --yes vercel@63.1.2 build --prod
+
+      - name: Deploy prebuilt artifacts to Vercel
+        run: npx --yes vercel@63.1.2 deploy --prebuilt --prod
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
