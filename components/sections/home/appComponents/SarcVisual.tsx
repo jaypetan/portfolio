@@ -16,11 +16,13 @@ export default function SarcVisual({ variant = 'preview' }: { variant?: 'preview
         alt={workData.visual.background.alt}
         className="absolute inset-0 z-0 h-full w-full object-cover"
       />
-      <img
+      <motion.img
         src={workData.visual.cursorSrc}
         alt=""
         aria-hidden="true"
-        className={`sarc-mouse-drift absolute left-[58%] top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${
+        animate={{ x: [-18, 18, -18] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        className={`absolute left-3/7 top-1/3 z-10 -translate-x-1/2 -translate-y-1/2 ${
           variant === 'header' ? 'w-32 sm:w-56' : 'w-20 sm:w-32'
         }`}
       />
@@ -30,3 +32,4 @@ export default function SarcVisual({ variant = 'preview' }: { variant?: 'preview
     </ShowcaseBoundedFrame>
   );
 }
+import { motion } from 'motion/react';

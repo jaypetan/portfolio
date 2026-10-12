@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import { useEffect, useRef, useState, type RefObject } from 'react';
 
-import AppVideo from './AppVideo';
+import AppConveyorCard from './AppConveyorCard';
 
 // Each entry comes from showcasePages in the project's JSON data.
 export interface AppShowcasePage {
@@ -23,57 +22,63 @@ interface AppConveyorProps {
 
 const SNAP_DELAY_MS = 180;
 
-// Measure vertical progress within the sticky section and whether it is visible.
-function getScrollState(section: HTMLElement, scroller: HTMLElement) {
+// Get the scroll progress
+function getScrollState(section: HTMLElement, scroller: HTMLElement, pageCount: number) {
   const bounds = section.getBoundingClientRect();
   const scrollBounds = scroller.getBoundingClientRect();
-  const travel = section.offsetHeight - scroller.clientHeight;
-  const distance = scrollBounds.top - bounds.top;
+  const travel = section.offsetHeight - scroller.clientHeight; // how much the section can scroll inside the scroller
+  const distance = scrollBounds.top - bounds.top; // how far the section has scrolled inside the scroller
+
+  const progress = Math.min(1, Math.max(0, distance / Math.max(1, travel)));
+  // Fractional card position for movement; round it when selecting a card.
+  const cardPosition = progress * Math.max(0, pageCount - 1);
 
   return {
     travel,
     distance,
-    progress: Math.min(1, Math.max(0, distance / Math.max(1, travel))),
+    cardPosition,
     visible: bounds.top < scrollBounds.bottom && bounds.bottom > scrollBounds.top,
   };
 }
 
-// One horizontal step includes the card width and the following gap.
+// Get distance between 2 cards
 function getCardStep(track: HTMLElement, card: HTMLElement) {
   return card.offsetWidth + (parseFloat(getComputedStyle(track).gap) || 0);
 }
 
+// Get the scrollTop value that aligns the selected card to the left edge of the showcase.
 function getCardScrollTop(
   section: HTMLElement,
   scroller: HTMLElement,
   index: number,
-  count: number,
+  pageCount: number,
 ) {
-  const { travel, distance } = getScrollState(section, scroller);
+  const { travel, distance } = getScrollState(section, scroller, pageCount);
   const sectionTop = scroller.scrollTop - distance;
 
-  return sectionTop + (index / Math.max(1, count - 1)) * travel;
+  return sectionTop + (index / Math.max(1, pageCount - 1)) * travel;
 }
 
 // Snap only inside the sticky interval so the user can enter and leave freely.
-function snapToNearestCard(section: HTMLElement, scroller: HTMLElement, count: number) {
-  const { travel, distance, progress } = getScrollState(section, scroller);
+function snapToNearestCard(section: HTMLElement, scroller: HTMLElement, pageCount: number) {
+  const { travel, distance, cardPosition } = getScrollState(section, scroller, pageCount);
 
-  if (count < 2 || travel <= 0 || distance < 0 || distance > travel) return;
+  if (pageCount < 2 || travel <= 0 || distance < 0 || distance > travel) return;
 
-  const index = Math.round(progress * (count - 1));
-  const target = getCardScrollTop(section, scroller, index, count);
+  const index = Math.round(cardPosition);
+  const target = getCardScrollTop(section, scroller, index, pageCount);
 
   if (Math.abs(target - scroller.scrollTop) < 1) return;
 
   scroller.scrollTo({
     top: target,
-    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+    behavior: 'smooth',
   });
 }
 
 // Connect scroll and resize events to the conveyor state.
 function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyorProps) {
+  const pageCount = pages.length;
   const viewportRef = useRef<HTMLDivElement>(null); // Visible area
   const trackRef = useRef<HTMLDivElement>(null); // Horizontal row of cards
 
@@ -88,7 +93,7 @@ function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyor
     // The app scrolls inside this container rather than the browser window.
     const scroller = section?.closest<HTMLElement>('.page-scroll-container');
 
-    if (!section || !viewport || !track || !scroller || !pages.length) return;
+    if (!section || !viewport || !track || !scroller || !pageCount) return;
 
     let frame = 0;
     let snapTimer: ReturnType<typeof setTimeout> | undefined;
@@ -96,18 +101,19 @@ function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyor
     const updateConveyor = () => {
       frame = 0;
 
-      const { progress, visible: isVisible } = getScrollState(section, scroller);
+      const { cardPosition, visible: isVisible } = getScrollState(section, scroller, pageCount);
       const firstCard = track.firstElementChild as HTMLElement | null;
 
       if (!firstCard) return;
 
       const step = getCardStep(track, firstCard);
 
-      // Move each selected card to the left edge of the showcase.
-      track.style.transform = `translateX(${-progress * (pages.length - 1) * step}px)`;
+      // Leave a small preview of the previous card beside the selected card.
+      const leftInset = Math.min(72, viewport.clientWidth * 0.15);
+      track.style.transform = `translateX(${leftInset - cardPosition * step}px)`;
 
       // The card closest to the left edge becomes selected and gains full color.
-      const index = Math.round(progress * (pages.length - 1));
+      const index = Math.round(cardPosition);
       setSelected(index);
       onSelectionChange(index);
 
@@ -125,10 +131,7 @@ function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyor
       clearTimeout(snapTimer);
 
       // Wait for wheel/touch scrolling to settle before locking onto the nearest card.
-      snapTimer = setTimeout(
-        () => snapToNearestCard(section, scroller, pages.length),
-        SNAP_DELAY_MS,
-      );
+      snapTimer = setTimeout(() => snapToNearestCard(section, scroller, pageCount), SNAP_DELAY_MS);
     };
 
     // Recalculate card spacing and scroll progress when the layout changes size.
@@ -147,7 +150,7 @@ function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyor
       observer.disconnect();
       scroller.removeEventListener('scroll', onScroll);
     };
-  }, [pages.length, sectionRef, onSelectionChange]);
+  }, [pageCount, sectionRef, onSelectionChange]);
 
   return { viewportRef, trackRef, selected, visible };
 }
@@ -155,6 +158,7 @@ function useConveyorScroll({ pages, sectionRef, onSelectionChange }: AppConveyor
 // Render the card row; the hook manages scrolling and selection.
 export default function AppConveyor(props: AppConveyorProps) {
   const { pages, sectionRef } = props;
+  const pageCount = pages.length;
   const { viewportRef, trackRef, selected, visible } = useConveyorScroll(props);
 
   // Clicking a card scrolls directly to its left-aligned position.
@@ -165,49 +169,28 @@ export default function AppConveyor(props: AppConveyorProps) {
     if (!section || !scroller) return;
 
     scroller.scrollTo({
-      top: getCardScrollTop(section, scroller, index, pages.length),
+      top: getCardScrollTop(section, scroller, index, pageCount),
       behavior: 'instant',
     });
   };
 
-  if (!pages.length) return null;
+  if (!pageCount) return null;
 
   return (
     <div
       ref={viewportRef}
-      className="relative w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,black_90%,transparent)]"
+      className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_90%,transparent)]"
     >
       <div ref={trackRef} className="flex w-max items-center gap-5 sm:gap-8">
         {/* Keep every card in the row; only the selected video is allowed to play. */}
         {pages.map((page, index) => (
-          <button
+          <AppConveyorCard
             key={page.id}
-            type="button"
-            tabIndex={index === selected ? 0 : -1}
-            onClick={() => navigate(index)}
-            className={`
-              relative w-[min(65vw,320px,28svh)] aspect-[1206/2622]
-              shrink-0 overflow-hidden rounded-2xl border-0 p-0 outline-none
-              transition-[filter,opacity,scale] duration-200 ease-linear
-              motion-reduce:transition-none
-              ${
-                index === selected
-                  ? 'scale-100 opacity-100 grayscale-0'
-                  : 'scale-90 opacity-35 grayscale'
-              }`}
-          >
-            {page.media.type === 'video' ? (
-              <AppVideo src={page.media.src} active={index === selected && visible} />
-            ) : (
-              <Image
-                src={page.media.src}
-                alt={page.media.alt}
-                fill
-                sizes="(max-width: 640px) 65vw, 320px"
-                className="object-cover"
-              />
-            )}
-          </button>
+            page={page}
+            selected={index === selected}
+            visible={visible}
+            onSelect={() => navigate(index)}
+          />
         ))}
       </div>
     </div>

@@ -1,9 +1,15 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import AppConveyor, { type AppShowcasePage } from './AppConveyor';
 import AppConveyorDetails from './AppConveyorDetails';
 
 // Owns the showcase section, sticky layout, heading, and card counter.
-export default function AppConveyorShowcase({ pages }: { pages: AppShowcasePage[] }) {
+export default function AppConveyorShowcase({
+  pages,
+  children,
+}: {
+  pages: AppShowcasePage[];
+  children?: ReactNode;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [selected, setSelected] = useState(0);
 
@@ -24,7 +30,7 @@ export default function AppConveyorShowcase({ pages }: { pages: AppShowcasePage[
               Showcase
             </h2>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-              Scroll to explore the different components of the app.
+              Scroll down to explore the different components of the app.
             </p>
           </div>
           <span className="text-sm tabular-nums text-slate-500 dark:text-slate-400">
@@ -33,6 +39,7 @@ export default function AppConveyorShowcase({ pages }: { pages: AppShowcasePage[
         </div>
         <AppConveyorDetails page={pages[selected]} />
         <AppConveyor pages={pages} sectionRef={sectionRef} onSelectionChange={setSelected} />
+        {children ? <div className="mt-6">{children}</div> : null}
       </div>
     </section>
   );

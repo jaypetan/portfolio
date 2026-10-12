@@ -10,7 +10,10 @@ const DontDrownPage: NextPage = () => {
   return (
     <ProjectPageTemplate project={project}>
       {videoId ? (
-        <section aria-labelledby="gameplay-video">
+        <section
+          aria-labelledby="gameplay-video"
+          className="mt-14 border-t border-slate-900/10 dark:border-white/10 sm:mt-20 pt-10 sm:pt-12"
+        >
           <h2 id="gameplay-video" className="project-section-heading mb-6">
             Gameplay Video
           </h2>
@@ -24,6 +27,20 @@ const DontDrownPage: NextPage = () => {
               allowFullScreen
             />
           </div>
+          <h2
+            id="gameplay-video"
+            className="mt-6 justify-self-end ml-auto text-sm sm:text-base uppercase  tracking-wide text-slate-500 dark:text-slate-400"
+          >
+            Play the Game @{' '}
+            <a
+              href="https://jaypetan.itch.io/dontdrown"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline dark:text-blue-400"
+            >
+              jaypetan.itch.io/dontdrown
+            </a>
+          </h2>
         </section>
       ) : null}
     </ProjectPageTemplate>

@@ -77,7 +77,6 @@ On Windows PowerShell, if execution policy blocks `npm.ps1` or `npx.ps1`, use `n
 - `custom={direction}` on `AnimatePresence` passes the new direction to the outgoing page as well as the incoming page.
 - `transition={{ type: 'tween' }}` prevents spring bounce, using default tween duration and easing.
 - `initial={false}` prevents an animation on first load.
-- `useReducedMotion()` disables sliding when the user requests reduced motion in device settings.
 - Navigation sits outside the animated wrapper and stays fixed during transitions.
 
 ## Main components

@@ -2,7 +2,7 @@ import AppIcon from '@/components/ui/AppIcon';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { House } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import navigationData from '@/data/navigation.json';
 import HoverFollow from '@/components/ui/HoverFollow';
 import MentaiyaVisual from '@/components/sections/home/appComponents/MentaiyaVisual';
@@ -28,7 +28,7 @@ function renderVisual(app: NavigationApp) {
     case 'dontdrown':
       return <DontDrownVisual />;
     case 'ntueats':
-      return <NTUeatsVisual iconSrc={app.iconSrc} />;
+      return <NTUeatsVisual />;
     default:
       return null;
   }
@@ -36,7 +36,6 @@ function renderVisual(app: NavigationApp) {
 
 export default function Navigation() {
   const { pathname: currentPage } = useRouter();
-  const reduceMotion = useReducedMotion();
   const currentPageTooltip = (
     <div className="rounded-lg bg-slate-900 px-3 py-2 text-sm text-white shadow-lg whitespace-nowrap">
       You are already on this page
@@ -57,7 +56,7 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, pointerEvents: 'none' }}
-            transition={reduceMotion ? { duration: 0 } : { type: 'tween' }}
+            transition={{ type: 'tween' }}
           >
             <Link
               href="/"
@@ -71,51 +70,64 @@ export default function Navigation() {
         )}
       </AnimatePresence>
       <nav className="fixed left-1/2 z-100 bottom-12 -translate-x-1/2">
+        {/* Show the section label when on the home page */}
+        {currentPage === '/' ? (
+          <div className="absolute inset-x-0 bottom-full mb-3 flex justify-between px-1 text-[10px] font-medium uppercase tracking-wide text-slate-700 dark:text-slate-300 sm:text-xs">
+            <span>Work experience</span>
+            <span>Projects</span>
+          </div>
+        ) : null}
         <div className="w-[calc(100dvw-24px)] max-w-96 sm:max-w-none sm:w-150 flex items-center justify-between px-4 py-4 glassmorphism-darkbg dark:glassmorphism">
           {/* Work Experiences */}
-          <ul className="flex gap-4 list-none">
-            {workExperiences.map((experience) => (
-              <li key={experience.id}>
-                <HoverFollow
-                  follower={
-                    currentPage === experience.href ? currentPageTooltip : renderVisual(experience)
-                  }
-                >
-                  <AppIcon
-                    backgroundColor={experience.backgroundColor}
-                    iconSrc={experience.iconSrc}
-                    iconWidth={experience.iconWidth}
-                    iconHeight={experience.iconHeight}
-                    iconAlt={experience.label}
-                    href={experience.href}
-                    currentPage={currentPage}
-                  />
-                </HoverFollow>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <ul className="flex gap-4 list-none">
+              {workExperiences.map((experience) => (
+                <li key={experience.id}>
+                  <HoverFollow
+                    follower={
+                      currentPage === experience.href
+                        ? currentPageTooltip
+                        : renderVisual(experience)
+                    }
+                  >
+                    <AppIcon
+                      backgroundColor={experience.backgroundColor}
+                      iconSrc={experience.iconSrc}
+                      iconWidth={experience.iconWidth}
+                      iconHeight={experience.iconHeight}
+                      iconAlt={experience.label}
+                      href={experience.href}
+                      currentPage={currentPage}
+                    />
+                  </HoverFollow>
+                </li>
+              ))}
+            </ul>
+          </div>
           {/* Projects */}
-          <ul className="flex gap-4 list-none border-l-2 border-white/10 pl-2 sm:pl-8">
-            {projects.map((project) => (
-              <li key={project.id}>
-                <HoverFollow
-                  follower={
-                    currentPage === project.href ? currentPageTooltip : renderVisual(project)
-                  }
-                >
-                  <AppIcon
-                    backgroundColor={project.backgroundColor}
-                    iconSrc={project.iconSrc}
-                    iconWidth={project.iconWidth}
-                    iconHeight={project.iconHeight}
-                    iconAlt={project.label}
-                    href={project.href}
-                    currentPage={currentPage}
-                  />
-                </HoverFollow>
-              </li>
-            ))}
-          </ul>
+          <div className="border-l-2 border-white/10 pl-2 sm:pl-8">
+            <ul className="flex gap-4 list-none">
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <HoverFollow
+                    follower={
+                      currentPage === project.href ? currentPageTooltip : renderVisual(project)
+                    }
+                  >
+                    <AppIcon
+                      backgroundColor={project.backgroundColor}
+                      iconSrc={project.iconSrc}
+                      iconWidth={project.iconWidth}
+                      iconHeight={project.iconHeight}
+                      iconAlt={project.label}
+                      href={project.href}
+                      currentPage={currentPage}
+                    />
+                  </HoverFollow>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </nav>
     </>

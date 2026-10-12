@@ -1,19 +1,29 @@
 {
   "title": "NTUeats",
-  "subtitle": "Mobile app project",
+  "subtitle": "Mobile App Design & Development",
   "categoryLabel": "Project",
-  "languages": ["Language one", "Language two", "Language three"],
+  "languages": ["React Native", "Expo", "TypeScript", "Firebase", "Procreate", "Figma"],
   "contributions": [
-    "Add a short description of your first contribution here.",
-    "Describe another feature, responsibility, or improvement you worked on.",
-    "Share a result or highlight from this project."
+    "Designed the app's interface, typography, and colors in Figma, and created hand-drawn assets in Procreate.",
+    "Built the interface from wireframes and low-fidelity prototypes using React Native and Expo, utilizing React hooks for state management and side effects.",
+    "Planned the data structure with an ER diagram and integrated Firebase Firestore, Cloud Storage, and Gemini AI to support cloud content and image uploads and retrieval."
   ],
   "bentoSections": [],
   "showcasePages": [
     {
+      "id": "login",
+      "name": "Login & Sign Up",
+      "description": "Users can log in or create an account, with Clerk handling email validation and checking that passwords meet the required criteria during sign-up.",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/login.png",
+        "alt": "NTUeats login and sign-up screen"
+      }
+    },
+    {
       "id": "home",
       "name": "Home",
-      "description": "",
+      "description": "Users can have a quick look at EatWHAT (list of stalls) and CookWHAT (list of recipes), alongside notifications for new likes and comments on their posts. Tapping a notification takes them straight to the relevant post.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/home.png",
@@ -21,29 +31,9 @@
       }
     },
     {
-      "id": "nav",
-      "name": "Navigation",
-      "description": "",
-      "media": {
-        "type": "image",
-        "src": "/project/ntuEats/showcase/nav.png",
-        "alt": "NTUeats Navigation screen"
-      }
-    },
-    {
-      "id": "eatwhat",
-      "name": "Eat What",
-      "description": "",
-      "media": {
-        "type": "image",
-        "src": "/project/ntuEats/showcase/eatwhat.png",
-        "alt": "NTUeats Eat What screen"
-      }
-    },
-    {
       "id": "randomizer",
       "name": "Food Randomizer",
-      "description": "",
+      "description": "For users who can't decide what to eat, the randomizer suggests a dish or stall with a playful animation. It sits at the bottom of the home page.",
       "media": {
         "type": "video",
         "src": "/project/ntuEats/showcase/randomizer.mp4",
@@ -51,9 +41,29 @@
       }
     },
     {
+      "id": "eatwhat",
+      "name": "EatWHAT / CookWHAT",
+      "description": "Users can browse stalls and recipes, search for something specific, filter by type, or sort by popularity and recency.",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/eatwhat.png",
+        "alt": "NTUeats Eat What screen"
+      }
+    },
+    {
+      "id": "nav",
+      "name": "Navigation",
+      "description": "Users can swipe right or tap the menu icon to open the navigation panel and move easily between pages.",
+      "media": {
+        "type": "image",
+        "src": "/project/ntuEats/showcase/nav.png",
+        "alt": "NTUeats Navigation screen"
+      }
+    },
+    {
       "id": "stall",
       "name": "Stall Details",
-      "description": "",
+      "description": "Inspired by Google Reviews, this page brings together stall reviews, menus, and photos uploaded by users. Reviews can be sorted, while pop-up menus and expandable images make the details easier to explore.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/stall.png",
@@ -63,7 +73,7 @@
     {
       "id": "recipe",
       "name": "Recipes",
-      "description": "",
+      "description": "Users can see the recipe overview, cooking steps, and comments, making it easy to follow along and see what others have shared.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/recipe.png",
@@ -72,8 +82,8 @@
     },
     {
       "id": "recipe-add",
-      "name": "Add a Recipe",
-      "description": "",
+      "name": "Upload a Recipe",
+      "description": "This page shows the form layout used throughout the app. Users can add extra input fields as needed and organize their recipe instructions into numbered steps.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/recipe-add.png",
@@ -83,7 +93,7 @@
     {
       "id": "profile",
       "name": "Profile",
-      "description": "",
+      "description": "Users can revisit saved and liked items, manage their comments and uploaded recipes, and update their dietary preferences and profile details.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/profile.png",
@@ -93,7 +103,7 @@
     {
       "id": "report",
       "name": "Report",
-      "description": "",
+      "description": "Users can flag issues such as closed stalls or inappropriate comments, helping keep the app's content up to date. Gemini AI sorts reports by category and issue type to make them easier for administrators to review.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/report.png",
@@ -103,7 +113,7 @@
     {
       "id": "admin",
       "name": "Admin",
-      "description": "",
+      "description": "The admin panel lets administrators add and edit stalls and review community reports. It was still a work in progress, with more tools planned.",
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/admin.png",

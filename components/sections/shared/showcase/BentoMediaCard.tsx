@@ -48,6 +48,7 @@ function BentoVideo({ media }: { media: BentoItemData['media'] }) {
       }
     };
 
+    // IntersectionObserver to detect when the video is in the viewport.
     const observer = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
@@ -108,9 +109,21 @@ function BentoImage({ media }: { media: BentoItemData['media'] }) {
 export default function BentoMediaCard({ item, className = '' }: BentoMediaCardProps) {
   const tooltipId = useId();
   const [anchor, setAnchor] = useState<TooltipAnchor | null>(null);
+  const [touchInput, setTouchInput] = useState(false);
   const isPresent = useIsPresent();
   const hoverText = item.hoverText?.trim();
   const isTooltipOpen = Boolean(anchor);
+
+  useEffect(() => {
+    // Show descriptions without a hover gesture on touch-first devices.
+    const query = window.matchMedia('(hover: none) and (pointer: coarse)');
+    const updateInput = () => setTouchInput(query.matches);
+    updateInput();
+
+    // Listen for changes to the media query to update the input state.
+    query.addEventListener('change', updateInput);
+    return () => query.removeEventListener('change', updateInput);
+  }, []);
 
   useEffect(() => {
     if (!isTooltipOpen) return;
@@ -129,9 +142,15 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
       tabIndex={hoverText ? 0 : undefined}
       aria-describedby={hoverText && anchor && isPresent ? tooltipId : undefined}
       onPointerEnter={(event) => {
+        setTouchInput(event.pointerType !== 'mouse');
         if (hoverText && event.pointerType === 'mouse') {
           setAnchor({ x: event.clientX, y: event.clientY });
         }
+      }}
+      onPointerDown={(event) => {
+        const isTouch = event.pointerType !== 'mouse';
+        setTouchInput(isTouch);
+        if (isTouch) setAnchor(null);
       }}
       onPointerMove={(event) => {
         if (hoverText && event.pointerType === 'mouse') {
@@ -142,7 +161,8 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
         if (event.pointerType === 'mouse') setAnchor(null);
       }}
       onFocus={(event) => {
-        if (!hoverText) return;
+        // Touch focus must not open the floating desktop tooltip.
+        if (!hoverText || !event.currentTarget.matches(':focus-visible')) return;
         const rect = event.currentTarget.getBoundingClientRect();
         setAnchor({ x: rect.left, y: rect.bottom });
       }}
@@ -162,12 +182,23 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
           <BentoImage key={item.media.src} media={item.media} />
         )
       ) : null}
-      <figcaption className="pointer-events-none absolute inset-x-3 bottom-3 z-10 flex justify-center text-center">
-        <span className="max-w-full rounded-md bg-black/85 px-2.5 py-1 text-sm font-medium leading-snug text-white">
+      <div
+        className={`z-10 text-center ${
+          touchInput && hoverText
+            ? 'relative flex flex-col items-center gap-2 px-3 pb-3 pt-[35%]'
+            : 'pointer-events-none absolute inset-x-3 bottom-3 flex justify-center'
+        }`}
+      >
+        <span className="inline-block max-w-full shrink-0 rounded-md bg-black/85 px-2.5 py-1 text-sm font-medium leading-snug text-white">
           {item.description}
         </span>
-      </figcaption>
-      {hoverText && anchor && isPresent ? (
+        {touchInput && hoverText ? (
+          <p className="w-full rounded-xl bg-black/85 p-3 text-left text-sm leading-6 text-white">
+            {hoverText}
+          </p>
+        ) : null}
+      </div>
+      {hoverText && anchor && isPresent && !touchInput ? (
         <BentoTooltip id={tooltipId} text={hoverText} anchor={anchor} />
       ) : null}
     </figure>
