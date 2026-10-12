@@ -7,7 +7,7 @@ interface AppConveyorDetailsProps {
 // Display the details supplied by the currently selected showcase entry.
 export default function AppConveyorDetails({ page }: AppConveyorDetailsProps) {
   return (
-    <div className="flex h-48 max-w-2xl shrink-0 flex-col sm:h-40">
+    <div className="flex h-48 max-w-2xl shrink-0 flex-col sm:h-40 [@media(max-height:600px)]:h-24">
       <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{page.name}</h3>
 
       <div className="mt-3 min-h-0 flex-1 overflow-y-auto">

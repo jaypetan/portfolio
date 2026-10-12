@@ -23,8 +23,8 @@ export default function AppConveyorShowcase({
       style={{ height: `${100 + Math.max(0, pages.length - 1) * 55}svh` }}
     >
       {/* Keep the belt in view while the tall outer section supplies scroll distance. */}
-      <div className="sticky top-0 flex h-svh flex-col justify-start py-6 sm:py-10">
-        <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="sticky top-0 flex h-svh flex-col pt-6 pb-40 sm:pt-10">
+        <div className="mb-5 flex shrink-0 items-center justify-between gap-4">
           <div>
             <h2 id="app-showcase-title" className="project-section-heading">
               Showcase
@@ -38,8 +38,10 @@ export default function AppConveyorShowcase({
           </span>
         </div>
         <AppConveyorDetails page={pages[selected]} />
-        <AppConveyor pages={pages} sectionRef={sectionRef} onSelectionChange={setSelected} />
-        {children ? <div className="mt-6">{children}</div> : null}
+        <div className="min-h-0 w-full flex-1 [container-type:size]">
+          <AppConveyor pages={pages} sectionRef={sectionRef} onSelectionChange={setSelected} />
+        </div>
+        {children ? <div className="mt-4 shrink-0">{children}</div> : null}
       </div>
     </section>
   );

@@ -137,8 +137,8 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
   }, [isTooltipOpen, tooltipId]);
 
   return (
-    <figure
-      className={`bento-media-card relative m-0 min-w-0 overflow-hidden rounded-3xl bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-500 dark:bg-slate-900 ${className}`}
+    <div
+      className={`bento-media-card relative m-0 min-w-0 overflow-hidden rounded-3xl bg-slate-200 focus-visible:outline-2 outline-white/10 outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-500 dark:bg-slate-900   ${className}`}
       tabIndex={hoverText ? 0 : undefined}
       aria-describedby={hoverText && anchor && isPresent ? tooltipId : undefined}
       onPointerEnter={(event) => {
@@ -175,6 +175,7 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-linear-to-br from-slate-400/15 via-transparent to-slate-500/20 dark:from-slate-500/15 dark:to-slate-700/20"
       />
+      {/* background image or video */}
       {item.media.src ? (
         item.media.type === 'video' ? (
           <BentoVideo key={item.media.src} media={item.media} />
@@ -182,25 +183,31 @@ export default function BentoMediaCard({ item, className = '' }: BentoMediaCardP
           <BentoImage key={item.media.src} media={item.media} />
         )
       ) : null}
+
+      {/* description */}
       <div
         className={`z-10 text-center ${
           touchInput && hoverText
-            ? 'relative flex flex-col items-center gap-2 px-3 pb-3 pt-[35%]'
+            ? 'absolute inset-x-3 bottom-3 flex max-h-[65%] flex-col items-center gap-2'
             : 'pointer-events-none absolute inset-x-3 bottom-3 flex justify-center'
         }`}
       >
         <span className="inline-block max-w-full shrink-0 rounded-md bg-black/85 px-2.5 py-1 text-sm font-medium leading-snug text-white">
           {item.description}
         </span>
+
+        {/* description for touch devices */}
         {touchInput && hoverText ? (
-          <p className="w-full rounded-xl bg-black/85 p-3 text-left text-sm leading-6 text-white">
+          <p className="min-h-0 w-full overflow-y-auto overscroll-contain rounded-xl bg-black/85 p-3 text-left text-sm leading-6 text-white [scrollbar-color:#94a3b8_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-400 [&::-webkit-scrollbar-track]:bg-transparent">
             {hoverText}
           </p>
         ) : null}
       </div>
+
+      {/* tooltip for desktop users */}
       {hoverText && anchor && isPresent && !touchInput ? (
         <BentoTooltip id={tooltipId} text={hoverText} anchor={anchor} />
       ) : null}
-    </figure>
+    </div>
   );
 }

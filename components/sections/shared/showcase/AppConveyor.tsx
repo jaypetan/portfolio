@@ -179,9 +179,9 @@ export default function AppConveyor(props: AppConveyorProps) {
   return (
     <div
       ref={viewportRef}
-      className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,black_90%,transparent)]"
+      className="relative h-full w-full overflow-hidden [mask-image:linear-gradient(to_right,black_90%,transparent)]"
     >
-      <div ref={trackRef} className="flex w-max items-center gap-5 sm:gap-8">
+      <div ref={trackRef} className="flex h-full w-max items-center gap-5 sm:gap-8">
         {/* Keep every card in the row; only the selected video is allowed to play. */}
         {pages.map((page, index) => (
           <AppConveyorCard

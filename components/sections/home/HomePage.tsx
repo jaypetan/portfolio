@@ -20,7 +20,7 @@ export default function HomePage() {
         }`}
       >
         <div className="flex flex-col sm:grid sm:grid-cols-[1fr_auto_1fr] gap-4 items-center">
-          <div className="h-20 sm:h-32 sm:self-auto">
+          <div className="mb-6 h-20 sm:mb-0 sm:h-32 sm:self-auto">
             <Light />
           </div>
           <TiltedCard
@@ -41,9 +41,7 @@ export default function HomePage() {
           </div>
           {/* Bottom Text */}
           <div className="sm:col-span-3">
-            <h1 className="home-title font-source-sans uppercase font-bold sm:font-normal">
-              Frontend Developer
-            </h1>
+            <h1 className="home-title uppercase">Frontend Developer</h1>
             <div className="home-mobile-tagline sm:hidden">
               <p>Creating beautiful, functional web experiences.</p>
             </div>

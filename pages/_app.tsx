@@ -1,9 +1,13 @@
 import type { AppProps } from 'next/app';
+import { Source_Sans_3, Space_Grotesk } from 'next/font/google';
 import { useState } from 'react';
 import Navigation from '@/components/layout/Navigation';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimatePresence, motion } from 'motion/react';
+
+const sourceSans = Source_Sans_3({ subsets: ['latin'], display: 'swap' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], display: 'swap' });
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const [settledPath, setSettledPath] = useState(router.pathname);
@@ -22,6 +26,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <style jsx global>{`
+        :root {
+          --font-source-sans: ${sourceSans.style.fontFamily};
+          --font-space-grotesk: ${spaceGrotesk.style.fontFamily};
+        }
+      `}</style>
       <div
         className={`relative h-screen w-screen overflow-hidden ${
           isSliding

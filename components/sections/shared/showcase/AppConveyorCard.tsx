@@ -22,9 +22,10 @@ export default function AppConveyorCard({
       tabIndex={selected ? 0 : -1}
       onClick={onSelect}
       className={`
-              relative w-[min(65vw,320px,28svh)] aspect-[1206/2622]
+              relative w-[min(65vw,320px,28svh,46cqh)] aspect-[1206/2622]
               shrink-0 overflow-hidden rounded-2xl border-0 p-0 outline-none
               transition-[filter,opacity,scale] duration-200 ease-linear
+              
 
               ${selected ? 'scale-100 opacity-100 grayscale-0' : 'scale-90 opacity-35 grayscale'}`}
     >

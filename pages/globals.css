@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 @import 'tailwindcss';
 
 /* Match next-themes, which toggles the dark class on the HTML element. */
@@ -29,20 +28,24 @@
   }
 
   .home-title {
-    @apply text-2xl;
+    font-family: var(--font-space-grotesk);
+    @apply text-4xl font-bold tracking-tight leading-none;
   }
 
   .home-tagline {
+    font-family: var(--font-source-sans);
     @apply text-xl;
   }
 
   .home-mobile-tagline {
+    font-family: var(--font-source-sans);
     @apply text-lg;
   }
 
   @media (min-width: 640px) {
     .home-title {
-      font-size: min(7vw, 8svh, 6rem);
+      font-weight: 400;
+      font-size: min(9vw, 10svh, 8rem);
     }
   }
 
@@ -174,31 +177,6 @@
     transform: translateY(-4px) scale(1.1);
   }
 
-  .font-montserrat {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-  }
-
-  .font-namum {
-    font-family: 'Nanum Pen Script', cursive;
-    font-weight: 400;
-  }
-
-  .font-source-sans {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 400;
-  }
-
-  .font-playwrite {
-    font-family: 'Playwrite GB S', cursive;
-    font-weight: 700;
-  }
-
-  .content {
-    font-family: 'Inter', sans-serif;
-    color: #020617;
-  }
-
   @keyframes scroll-up {
     from {
       transform: translateY(0);
@@ -251,8 +229,7 @@
     margin: 0;
     background: #e2e8f0;
     color: #020617;
-    font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
-      sans-serif;
+    font-family: var(--font-source-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 200ms ease, color 200ms ease;
