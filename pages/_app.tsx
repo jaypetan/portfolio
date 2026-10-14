@@ -6,6 +6,7 @@ import PageImageLoader from '@/components/layout/PageImageLoader';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimatePresence, motion } from 'motion/react';
+import { Analytics } from '@vercel/analytics/next';
 
 const sourceSans = Source_Sans_3({ subsets: ['latin'], display: 'swap' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], display: 'swap' });
@@ -61,6 +62,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </motion.div>
         </AnimatePresence>
       </div>
+      <Analytics />
     </ThemeProvider>
   );
 }
