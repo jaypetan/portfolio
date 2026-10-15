@@ -1,11 +1,11 @@
 {
   "title": "Mentai-Ya",
   "subtitle": "Web Developer",
-  "categoryLabel": "Work experience",
+  "categoryLabel": "Work Experience",
   "languages": ["React", "Tailwind CSS", "JavaScript"],
   "contributions": [
-    "Created a responsive website using Vite, React, and TailwindCSS.",
-    "Handled web design, development and maintenance, focusing on an attractive and user-friendly frontend.",
+    "Created a responsive website using Vite, React, and Tailwind CSS.",
+    "Handled web design, development, and maintenance, focusing on an attractive and user-friendly frontend.",
     "Facilitated multiple design reviews, leveraging user feedback to refine the UI/UX and ensure the final product aligned with the business vision."
   ],
   "bentoSections": [
@@ -15,7 +15,7 @@
       "items": [
         {
           "id": "instagram-feed",
-          "description": "Instagram feed",
+          "description": "Instagram Feed",
           "media": {
             "type": "image",
             "src": "/work/mentaiya/showcase/instagram-feed.png",
@@ -28,7 +28,7 @@
         },
         {
           "id": "contact-form",
-          "description": "Direct-to-email form",
+          "description": "Direct-to-Email Form",
           "media": {
             "type": "image",
             "src": "/work/mentaiya/showcase/contact-form.png",
@@ -41,7 +41,7 @@
         },
         {
           "id": "image-carousel",
-          "description": "Image carousel",
+          "description": "Image Carousel",
           "media": {
             "type": "video",
             "src": "/work/mentaiya/showcase/image-carousel.mp4",
@@ -54,7 +54,7 @@
         },
         {
           "id": "store-locator",
-          "description": "Store locator",
+          "description": "Store Locator",
           "media": {
             "type": "video",
             "src": "/work/mentaiya/showcase/store-locator.mp4",
@@ -67,7 +67,7 @@
         },
         {
           "id": "responsive-design",
-          "description": "Responsive design",
+          "description": "Responsive Design",
           "media": {
             "type": "image",
             "src": "/work/mentaiya/showcase/responsive-design.png",

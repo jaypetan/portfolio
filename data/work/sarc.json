@@ -1,10 +1,10 @@
 {
   "title": "Satellite Research Centre",
   "subtitle": "Web Developer",
-  "categoryLabel": "Work experience",
-  "languages": ["HTML", "CSS", "JavaScript", "HTMX"],
+  "categoryLabel": "Work Experience",
+  "languages": ["HTML", "CSS", "JavaScript", "htmx"],
   "contributions": [
-    "Redesigned the legacy Satellite Mission Planner into a high-fidelity web app using HTML, CSS, JavaScript, and HTMX with a strong emphasis on frontend architecture.",
+    "Redesigned the legacy Satellite Mission Planner into a high-fidelity web app using HTML, CSS, JavaScript, and htmx with a strong emphasis on frontend architecture.",
     "Collaborated on REST API design with FastAPI for seamless frontend-backend communication."
   ],
   "bentoSections": [
@@ -14,7 +14,7 @@
       "items": [
         {
           "id": "dashboard-grid-layout",
-          "description": "Dashboard grid layout",
+          "description": "Dashboard Grid Layout",
           "media": {
             "type": "image",
             "src": "/work/sarc/showcase/dashboard-grid-layout.png",
@@ -27,7 +27,7 @@
         },
         {
           "id": "cesium-globe-visualization",
-          "description": "CesiumJS globe visualization",
+          "description": "CesiumJS Globe Visualization",
           "media": {
             "type": "video",
             "src": "/work/sarc/showcase/cesium-globe-visualization.mp4",
@@ -40,7 +40,7 @@
         },
         {
           "id": "design-iterations",
-          "description": "Four design iterations",
+          "description": "Four Design Iterations",
           "media": {
             "type": "image",
             "src": "/work/sarc/showcase/design-iterations.png",

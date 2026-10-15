@@ -27,7 +27,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/home.png",
-        "alt": "NTUeats Home screen"
+        "alt": "NTUeats home screen"
       }
     },
     {
@@ -37,7 +37,7 @@
       "media": {
         "type": "video",
         "src": "/project/ntuEats/showcase/randomizer.mp4",
-        "alt": "NTUeats Food Randomizer screen"
+        "alt": "NTUeats food randomizer screen"
       }
     },
     {
@@ -47,7 +47,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/eatwhat.png",
-        "alt": "NTUeats Eat What screen"
+        "alt": "NTUeats EatWHAT screen"
       }
     },
     {
@@ -57,7 +57,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/nav.png",
-        "alt": "NTUeats Navigation screen"
+        "alt": "NTUeats navigation screen"
       }
     },
     {
@@ -67,7 +67,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/stall.png",
-        "alt": "NTUeats Stall Details screen"
+        "alt": "NTUeats stall details screen"
       }
     },
     {
@@ -77,7 +77,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/recipe.png",
-        "alt": "NTUeats Recipes screen"
+        "alt": "NTUeats recipes screen"
       }
     },
     {
@@ -87,7 +87,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/recipe-add.png",
-        "alt": "NTUeats Add a Recipe screen"
+        "alt": "NTUeats recipe upload screen"
       }
     },
     {
@@ -97,7 +97,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/profile.png",
-        "alt": "NTUeats Profile screen"
+        "alt": "NTUeats profile screen"
       }
     },
     {
@@ -107,7 +107,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/report.png",
-        "alt": "NTUeats Report screen"
+        "alt": "NTUeats report screen"
       }
     },
     {
@@ -117,7 +117,7 @@
       "media": {
         "type": "image",
         "src": "/project/ntuEats/showcase/admin.png",
-        "alt": "NTUeats Admin screen"
+        "alt": "NTUeats admin screen"
       }
     }
   ]

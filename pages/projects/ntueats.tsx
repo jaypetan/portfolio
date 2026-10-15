@@ -7,6 +7,7 @@ const NTUEatsPage: NextPage = () => {
   return (
     <ProjectPageTemplate
       project={project}
+      bottomPadding="pb-6"
       showcase={
         <AppConveyorShowcase pages={project.showcasePages}>
           <h2 className="justify-self-end ml-auto text-sm sm:text-base uppercase  tracking-wide text-slate-500 dark:text-slate-400">

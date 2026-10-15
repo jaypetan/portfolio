@@ -1,14 +1,14 @@
 {
-  "title": "Met EV",
+  "title": "MetEV",
   "subtitle": "Web Developer",
-  "categoryLabel": "Work experience",
-  "description": "I worked as a web developer for Met EV, a startup focused on electric vehicles. My role involved developing and maintaining the company's website and web applications.",
+  "categoryLabel": "Work Experience",
+  "description": "I worked as a web developer for MetEV, a startup focused on electric vehicles. My role involved developing and maintaining the company's website and web applications.",
   "languages": ["Next.js", "Tailwind CSS", "TypeScript"],
   "contributions": [
-    "Engineered user-centric frontend components with Next.js and TailwindCSS",
-    "Led the development of the checkout flow through state managements, cookies and form validations.",
-    "Worked in a team of four to build a website for a startup - from ideation and wireframing to final deployment.",
-    "Engaged in inter-departmental brainstorming sessions for the start up."
+    "Engineered user-centric frontend components with Next.js and Tailwind CSS.",
+    "Led the development of the checkout flow through state management, cookies, and form validation.",
+    "Worked in a team of four to build a website for a startup, from ideation and wireframing to final deployment.",
+    "Engaged in interdepartmental brainstorming sessions for the startup."
   ],
   "bentoSections": [
     {
@@ -17,7 +17,7 @@
       "items": [
         {
           "id": "product-photography",
-          "description": "Product photography",
+          "description": "Product Photography",
           "media": {
             "type": "image",
             "src": "/work/metev/showcase/product-photography.jpg",
@@ -30,7 +30,7 @@
         },
         {
           "id": "team-brainstorming",
-          "description": "Team brainstorming",
+          "description": "Team Brainstorming",
           "media": {
             "type": "image",
             "src": "/work/metev/showcase/team-brainstorming.jpg",
@@ -43,7 +43,7 @@
         },
         {
           "id": "rmit-showcase",
-          "description": "RMIT showcase",
+          "description": "RMIT Showcase",
           "media": {
             "type": "image",
             "src": "/work/metev/showcase/rmit-showcase.jpg",
@@ -56,7 +56,7 @@
         },
         {
           "id": "product-checkout",
-          "description": "Product checkout",
+          "description": "Product Checkout",
           "media": {
             "type": "image",
             "src": "/work/metev/showcase/product-checkout.png",
@@ -69,7 +69,7 @@
         },
         {
           "id": "website-components",
-          "description": "Website components",
+          "description": "Website Components",
           "media": {
             "type": "image",
             "src": "/work/metev/showcase/website-components.png",
