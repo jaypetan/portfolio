@@ -2,12 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import LiquidEther from '@/components/backgrounds/LiquidEtherBackground';
 import HomePage from '@/components/sections/home/HomePage';
+import HomePagePreloader from '@/components/layout/HomePagePreloader';
 
 const Home: NextPage = () => {
   return (
     <>
+      <HomePagePreloader />
       <Head>
-        <title>Portfolio - Home</title>
+        <title>Jun Peng | Portfolio</title>
         <meta name="description" content="Welcome to my portfolio" />
       </Head>
       <main className="h-screen relative flex">

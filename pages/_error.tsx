@@ -12,7 +12,7 @@ function ErrorPage({ statusCode }: ErrorProps) {
   return (
     <>
       <Head>
-        <title>{code} - Something Went Wrong</title>
+        <title>{`${code} - Something Went Wrong`}</title>
       </Head>
       <main className="min-h-[calc(100vh-70px)] flex flex-col items-center justify-center px-6 py-12 text-center">
         <h1 className="text-5xl font-bold text-sky-400 mb-4">{code}</h1>

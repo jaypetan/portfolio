@@ -7,6 +7,7 @@ interface TiltedCardProps {
   image?: StaticImageData | string;
   altText?: string;
   imageSize?: string;
+  sizes?: string;
   scaleOnHover?: number;
   rotateAmplitude?: number;
   showMobileWarning?: boolean;
@@ -24,6 +25,7 @@ export default function TiltedCard({
   image,
   altText = 'Tilted card image',
   imageSize = 'w-64 h-64',
+  sizes = '256px',
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showMobileWarning = true,
@@ -104,6 +106,8 @@ export default function TiltedCard({
           src={image ?? ''}
           alt={altText}
           loading="eager"
+          fetchPriority="high"
+          sizes={sizes}
           className={` ${imageSize} absolute top-0 left-0 object-cover rounded-[15px] will-change-transform transform-[translateZ(0)]`}
         />
 

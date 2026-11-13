@@ -27,6 +27,7 @@ export default function HomePage() {
             image={Hero}
             altText="Profile Image"
             imageSize="home-portrait aspect-square"
+            sizes="min(64vw, 34svh, 22rem)"
             rotateAmplitude={12}
             scaleOnHover={1.05}
             showMobileWarning={false}

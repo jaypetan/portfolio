@@ -22,9 +22,7 @@ export default function ProjectPageTemplate({
   return (
     <>
       <Head>
-        <title>
-          {project.title} - {project.subtitle} | Portfolio
-        </title>
+        <title>{`Showcase | ${project.title}`}</title>
         <meta
           name="description"
           content={`${project.title} - ${project.subtitle}. Contributions and selected highlights.`}
@@ -32,7 +30,9 @@ export default function ProjectPageTemplate({
       </Head>
       <main className="min-h-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         {header ? <ProjectHeader>{header}</ProjectHeader> : null}
-        <div className={`max-w-300 mx-auto w-full px-6 pt-10 sm:px-10 sm:pt-16 lg:px-12 ${bottomPadding}`}>
+        <div
+          className={`max-w-300 mx-auto w-full px-6 pt-10 sm:px-10 sm:pt-16 lg:px-12 ${bottomPadding}`}
+        >
           <ProjectDescription project={project} />
           {showcase ?? <ProjectShowcase sections={project.bentoSections} />}
           {/* Page-specific content appears after the shared showcase. */}
