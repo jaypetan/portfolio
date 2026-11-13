@@ -16,7 +16,7 @@ export interface AppShowcasePage {
 
 interface AppConveyorProps {
   pages: AppShowcasePage[];
-  sectionRef: RefObject<HTMLElement>;
+  sectionRef: RefObject<HTMLElement | null>;
   onSelectionChange: (index: number) => void;
 }
 

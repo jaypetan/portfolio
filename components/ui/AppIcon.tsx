@@ -6,8 +6,6 @@ import Link from 'next/link';
 interface AppIconProps {
   backgroundColor?: string;
   iconSrc?: string;
-  iconWidth?: number;
-  iconHeight?: number;
   iconAlt?: string;
   href?: string;
   currentPage?: string;
@@ -16,8 +14,6 @@ interface AppIconProps {
 export default function AppIcon({
   backgroundColor = '#0ea5e9',
   iconSrc,
-  iconWidth = 48,
-  iconHeight = 48,
   iconAlt = 'Icon',
   href,
   currentPage,
@@ -41,10 +37,10 @@ export default function AppIcon({
           src={iconSrc}
           alt={iconAlt}
           loading="eager"
-          width={iconWidth}
-          height={iconHeight}
+          width={48}
+          height={48}
           sizes="(min-width: 640px) 48px, 32px"
-          className="w-8 sm:w-12 h-auto object-contain"
+          className="w-8 sm:w-12 h-auto aspect-square object-contain"
         />
       )}
     </div>

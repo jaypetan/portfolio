@@ -25,9 +25,9 @@ export default function Light() {
       />
       <Image
         src={Lightbulb}
-        alt=""
-        width={96}
-        height={96}
+        alt="lightbulb"
+        width={551}
+        height={904}
         className="relative z-20 h-auto w-16 -rotate-25 hover:cursor-pointer active:scale-90 md:w-24"
       />
     </button>

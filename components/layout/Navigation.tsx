@@ -62,7 +62,7 @@ export default function Navigation() {
               href="/"
               aria-label="Go to home"
               title="Home"
-              className="flex h-12 w-12 items-center justify-center glassmorphism-darkbg dark:glassmorphism transition-transform hover:scale-110"
+              className="flex h-12 w-12 items-center justify-center rounded-2xl glassmorphism-darkbg dark:glassmorphism transition-transform hover:scale-110"
             >
               <House className="h-6 w-6" aria-hidden="true" />
             </Link>
@@ -77,7 +77,7 @@ export default function Navigation() {
             <span>Projects</span>
           </div>
         ) : null}
-        <div className="w-[calc(100dvw-24px)] max-w-96 sm:max-w-none sm:w-150 flex items-center justify-between px-4 py-4 glassmorphism-darkbg dark:glassmorphism">
+        <div className="w-[calc(100dvw-24px)] max-w-96 sm:max-w-none sm:w-150 flex items-center justify-between px-4 py-4 glassmorphism-darkbg dark:glassmorphism rounded-2xl">
           {/* Work Experiences */}
           <div>
             <ul className="flex gap-4 list-none">
@@ -94,8 +94,6 @@ export default function Navigation() {
                     <AppIcon
                       backgroundColor={experience.backgroundColor}
                       iconSrc={experience.iconSrc}
-                      iconWidth={experience.iconWidth}
-                      iconHeight={experience.iconHeight}
                       iconAlt={experience.label}
                       href={experience.href}
                       currentPage={currentPage}
@@ -119,8 +117,6 @@ export default function Navigation() {
                     <AppIcon
                       backgroundColor={project.backgroundColor}
                       iconSrc={project.iconSrc}
-                      iconWidth={project.iconWidth}
-                      iconHeight={project.iconHeight}
                       iconAlt={project.label}
                       href={project.href}
                       currentPage={currentPage}
